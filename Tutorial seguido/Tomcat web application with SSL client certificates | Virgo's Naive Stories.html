@@ -1,0 +1,1908 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><!--
+	generated in 0.824 seconds
+	139585 bytes batcached for 300 seconds
+--><head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Tomcat web application with SSL client certificates | Virgo's Naive Stories</title>
+	<link rel="pingback" href="http://virgo47.wordpress.com/xmlrpc.php">
+	<link rel="alternate" type="application/rss+xml" title="Virgo's Naive Stories » Feed" href="http://virgo47.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Virgo's Naive Stories » Comments Feed" href="http://virgo47.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Virgo's Naive Stories » Tomcat web application with SSL client&nbsp;certificates Comments Feed" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" id="all-css-0" href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.css" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-0" href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/global-print.css" type="text/css" media="print">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.js"></script>
+<link rel="stylesheet" id="all-css-0" href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='http://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://virgo47.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://virgo47.wordpress.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Adobe strikes again! With&nbsp;McAfee" href="http://virgo47.wordpress.com/2010/07/23/adobe-strikes-again-with-mcafee/">
+<link rel="next" title="Little theme&nbsp;change" href="http://virgo47.wordpress.com/2010/08/23/little-theme-change/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/">
+<link rel="shortlink" href="http://wp.me/pcxwh-7p">
+<link rel="alternate" type="application/json+oembed" href="http://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=http%3A%2F%2Fvirgo47.wordpress.com%2F2010%2F08%2F23%2Ftomcat-web-application-with-ssl-client-certificates%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="http://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=http%3A%2F%2Fvirgo47.wordpress.com%2F2010%2F08%2F23%2Ftomcat-web-application-with-ssl-client-certificates%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat web application with SSL client certificates">
+<meta property="og:url" content="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/">
+<meta property="og:description" content="Often repeated topic, tons of stuff you can google, yet either I’m retarded or just plain unlucky - it took ma days to get it all right. What we’re going to do? create our own CA (certification aut...">
+<meta property="article:published_time" content="2010-08-23T21:28:13+00:00">
+<meta property="article:modified_time" content="2011-02-20T20:37:40+00:00">
+<meta property="article:author" content="http://virgo47.wordpress.com/author/virgo47/">
+<meta property="og:site_name" content="Virgo's Naive Stories">
+<meta property="og:image" content="http://wordpress.com/i/blank.jpg?m=1383295312g">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="http://s2.wp.com/i/favicon.ico?m=1311975824g" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="http://s2.wp.com/i/favicon.ico?m=1311975824g" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="http://s0.wp.com/i/webclip.png?m=1391188133g">
+<link rel="openid.server" href="http://virgo47.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="http://virgo47.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="http://virgo47.wordpress.com/osd.xml" title="Virgo's Naive Stories">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wordpress.com/opensearch.xml" title="WordPress.com">
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none !important;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Virgo's Naive Stories"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Technology (Java mostly), games, music, or whatever just pisses me off. And maybe stories."><meta name="msapplication-task" content="name=Subscribe;action-uri=http://virgo47.wordpress.com/feed/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="title" content="Tomcat web application with SSL client&nbsp;certificates | Virgo's Naive Stories on WordPress.com">
+<meta name="description" content="Often repeated topic, tons of stuff you can google, yet either I’m retarded or just plain unlucky - it took ma days to get it all right. What we’re going to do? create our own CA (certification authority), issue our own server certificate, issue client certificate, configure Tomcat 6 and browser to use it all,…">
+		<style type="text/css">
+			#header h1,
+			#header h1 a,
+			#header h1 a:visited,
+			#header h4,
+			#header h4 a,
+			#header h4 a:visited,
+			.header-left {
+				color: #333333;
+			}
+		</style>
+
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/google_service.js">
+</script>
+<script type="text/javascript">
+if ( typeof GS_googleAddAdSenseService == 'function' ) { GS_googleAddAdSenseService("ca-pub-3443918307802676"); }
+if ( typeof GS_googleEnableAllServices == 'function' ) { GS_googleEnableAllServices() };
+</script><script src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/google_ads.js"></script>
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/amzn_ads.js"></script>
+<script type="text/javascript">
+try { amznads.getAds("3033","300x250"); } catch(e) { /* ignore */ }
+</script><script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/bid"></script>
+<script type="text/javascript">
+var amznKeys = amznads.getKeys();
+if (typeof amznKeys != "undefined" && amznKeys != "") { for (var i =0; i < amznKeys.length; i++) { var key = amznKeys[i]; GA_googleAddAttr("amzn", key);} }
+document.close();
+</script>
+<script type="text/javascript">
+if ( typeof GA_googleAddSlot == 'function' ) { GA_googleAddSlot("ca-pub-3443918307802676", "wpcom_below_post"); }
+</script>
+<script type="text/javascript">
+if ( typeof GA_googleFetchAds == 'function' ) { GA_googleFetchAds(); }
+</script>
+
+<script type="text/javascript">
+var wpcom_ads = { bid: 2988789, pt: 'permalink', wa: 0, as: 0, domain: 'virgo47.wordpress.com', url: 'http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/', gid: '', };
+</script>
+<link href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/shCore.css" type="text/css" rel="stylesheet"><link href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/shThemeDefault.css" type="text/css" rel="stylesheet"><style id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/ga.js" async="" type="text/javascript"></script>
+<script src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/osd.js" type="text/javascript"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/services.css"><script src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a_002.html" async="" type="text/javascript"></script><script>try {  for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){    var lastpass_f = document.forms[lastpass_iter];    if(typeof(lastpass_f.lpsubmitorig)=="undefined"){      if (typeof(lastpass_f.submit) == "function") {        lastpass_f.lpsubmitorig = lastpass_f.submit;        lastpass_f.submit = function(){          var form = this;          try {            if (document.documentElement && 'createEvent' in document)            {              var forms = document.getElementsByTagName('form');              for (var i=0 ; i<forms.length ; ++i)                if (forms[i]==form)                {                  var element = document.createElement('lpformsubmitdataelement');                  element.setAttribute('formnum',i);                  element.setAttribute('from','submithook');                  document.documentElement.appendChild(element);                  var evt = document.createEvent('Events');                  evt.initEvent('lpformsubmit',true,false);                  element.dispatchEvent(evt);                  break;                }            }          } catch (e) {}          try {            form.lpsubmitorig();          } catch (e) {}        }      }    }  }} catch (e) {}</script><script>try {  for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){    var lastpass_f = document.forms[lastpass_iter];    if(typeof(lastpass_f.lpsubmitorig)=="undefined"){      if (typeof(lastpass_f.submit) == "function") {        lastpass_f.lpsubmitorig = lastpass_f.submit;        lastpass_f.submit = function(){          var form = this;          try {            if (document.documentElement && 'createEvent' in document)            {              var forms = document.getElementsByTagName('form');              for (var i=0 ; i<forms.length ; ++i)                if (forms[i]==form)                {                  var element = document.createElement('lpformsubmitdataelement');                  element.setAttribute('formnum',i);                  element.setAttribute('from','submithook');                  document.documentElement.appendChild(element);                  var evt = document.createEvent('Events');                  evt.initEvent('lpformsubmit',true,false);                  element.dispatchEvent(evt);                  break;                }            }          } catch (e) {}          try {            form.lpsubmitorig();          } catch (e) {}        }      }    }  }} catch (e) {}</script><script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475.json"></script></head>
+
+<body class="single single-post postid-459 single-format-standard mp6 highlander-enabled highlander-light">
+
+<div id="header">
+	<div class="header-left">
+					<h4><a sl-processed="1" href="http://virgo47.wordpress.com/">Virgo's Naive Stories</a></h4>
+				<p id="description">Technology (Java mostly), games, music, or whatever just pisses me off. And maybe stories.</p>
+	</div>
+	<div class="header-right">
+		<form method="get" id="searchform" action="http://virgo47.wordpress.com/">
+			<div><label class="hidden" for="s">Search:</label>
+			<input name="s" id="s" type="text">
+			<input id="searchsubmit" value="Go" type="submit"></div>
+		</form>
+	</div>
+</div>
+<div id="access">
+	<div id="nav">
+		<div id="supernav" class="navleft nav">
+			<div class="menu"><ul><li><a sl-processed="1" href="http://virgo47.wordpress.com/">Home</a></li><li class="page_item page-item-2"><a sl-processed="1" href="http://virgo47.wordpress.com/about/">About me and this&nbsp;Blog</a></li><li class="page_item page-item-35"><a sl-processed="1" href="http://virgo47.wordpress.com/cesta/">Cesta</a></li></ul></div>
+		</div>
+		<div class="navright">
+			<a sl-processed="1" class="rsslink" rel="nofollow" href="http://virgo47.wordpress.com/feed/">Posts</a>
+			<a sl-processed="1" class="rsslink" rel="nofollow" href="http://virgo47.wordpress.com/comments/feed/">Comments</a>
+		</div>
+	</div>
+
+	<div id="subnav" class="subnav nav">
+			<div class="menu">
+		<ul>
+				<li class="cat-item cat-item-581"><a sl-processed="1" href="http://virgo47.wordpress.com/category/software/" title="Software related posts, might overlap with &quot;java&quot; or &quot;virtual-life&quot; as well.">software</a>
+</li>
+	<li class="cat-item cat-item-115184"><a sl-processed="1" href="http://virgo47.wordpress.com/category/virtual-life/" title="Anything related to my online life - web, services, etc.">virtual-life</a>
+</li>
+	<li class="cat-item cat-item-1747"><a sl-processed="1" href="http://virgo47.wordpress.com/category/fiction/" title="Writing, short stories, long-shorts, series...">fiction</a>
+</li>
+	<li class="cat-item cat-item-1017"><a sl-processed="1" href="http://virgo47.wordpress.com/category/java/" title="About Java related problems (programming)">java</a>
+</li>
+	<li class="cat-item cat-item-6870"><a sl-processed="1" href="http://virgo47.wordpress.com/category/real-life/" title="Real life troubles and pleasures (may be in Slovak)">real-life</a>
+</li>
+	<li class="cat-item cat-item-21"><a sl-processed="1" href="http://virgo47.wordpress.com/category/games/" title="About games... computer, online, ...">games</a>
+</li>
+	<li class="cat-item cat-item-18"><a sl-processed="1" href="http://virgo47.wordpress.com/category/music/" title="Music was my first love - and it will be the last">music</a>
+</li>
+	<li class="cat-item cat-item-412"><a sl-processed="1" href="http://virgo47.wordpress.com/category/video/" title="About films, TV shows, series and other similar stuff.">video</a>
+</li>
+		</ul>
+	</div>
+	</div>
+</div>
+
+<div id="wrap">
+<div id="content">
+
+	<div id="content-left">
+
+		
+			<div id="nav-above">
+				<div class="nav-previous"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/07/23/adobe-strikes-again-with-mcafee/" rel="prev"><span class="meta-nav">←</span> Adobe strikes again! With&nbsp;McAfee</a></div>
+				<div class="nav-next"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/little-theme-change/" rel="next">Little theme&nbsp;change <span class="meta-nav">→</span></a></div>
+			</div>
+
+			<div class="post-459 post type-post status-publish format-standard hentry category-java category-software tag-authority tag-ca tag-certificates tag-client-authorization tag-client-certificate tag-jks tag-keytool tag-openssl tag-tomcat tag-x509">
+
+				<div class="entry">
+
+					<h1>Tomcat web application with SSL client&nbsp;certificates</h1>
+
+					<div class="post-info">
+						<p>
+							<span class="time">August 23, 2010</span>
+																						<span class="post-comments"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comments" title="Comment on Tomcat web application with SSL client&nbsp;certificates">33 Comments</a></span>
+																				</p>
+					</div>
+
+					<p>Often  repeated topic, tons of stuff you can google, yet either 
+I’m retarded  or just plain unlucky – it took ma days to get it all 
+right. What we’re  going to do?</p>
+<ul>
+<li>create our own <a sl-processed="1" href="http://en.wikipedia.org/wiki/Certificate_authority">CA (certification authority)</a>,</li>
+<li>issue our own server <a sl-processed="1" href="http://en.wikipedia.org/wiki/Public_key_certificate">certificate</a>,</li>
+<li>issue client certificate,</li>
+<li>configure <a sl-processed="1" href="http://tomcat.apache.org/download-60.cgi">Tomcat 6</a> and browser to use it all,</li>
+<li>write an application that can identify user from the certificate.</li>
+</ul>
+<p>We need <a sl-processed="1" href="http://www.openssl.org/">OpenSSL</a> – for that I used <a sl-processed="1" href="http://www.ubuntu.com/">Ubuntu</a> installation running on Sun/Oracle <a sl-processed="1" href="http://www.virtualbox.org/">VirtualBox</a> as I run the Tomcat on Windows. Then I used <a sl-processed="1" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK 1.6</a> and its <a sl-processed="1" href="http://download.oracle.com/javase/6/docs/technotes/tools/windows/keytool.html">keytool</a>. Finally unzip downloaded Tomcat 6 somewhere. Generally, you’ll find this all on any Linux. Use Sun’s JDK, not gcj stuff.</p>
+<p>The  rough idea is this: We need CA – our authority. We’ll create our
+ own  one – it will substitute something serious like Verisign – but 
+it’s for  free. <img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/icon_smile.gif" alt=":-)" class="wp-smiley">  Then you need server certificate that is signed by this CA and  client certificate that is signed with the same CA as well.</p>
+<p><em>You  can create another authority that is not the root CA. You 
+can have your  own CA1 signed by some CA2 that is signed by root CA (<a sl-processed="1" href="http://en.wikipedia.org/wiki/Self-signed_certificate">self signed</a>).
+  You can have server certificate signed by CA1 and client certificates 
+ signed by CA3, but CA3 must be signed by CA2 (as is CA1). What you need
+  is a certificate of any CA “above” your server certificate imported 
+into  your browser (this is not absolutely necessary, but it ensures, 
+that  browser trusts the server certificate without asking the user – 
+which is  the idea why the most famous root CAs are pre-imported in your
+  browser). And you need CA “above” the client certificate for client  
+authentication + client certificate in your browser. I hope I didn’t  
+make any factual error in this paragraph. <img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/icon_smile.gif" alt=":-)" class="wp-smiley"> </em></p>
+<p>For now we will have a single self-signed root CA and both the server and the client certificates signed by the same CA.</p>
+<p><strong>Open SSL</strong></p>
+<p>We’ll start with OpenSSL and CA. I don’t use CA.sh helper script, 
+just because I don’t. Don’t ask why, it just wraps openssl command 
+anyway. To warn you in advance, I’m lame with <a sl-processed="1" href="http://en.wikipedia.org/wiki/Transport_Layer_Security">SSL</a>, <a sl-processed="1" href="http://en.wikipedia.org/wiki/Public_key_infrastructure">PKI</a>,
+  certificates, openssl, and the whole stuff – I just somehow made it 
+all  work. And I want you to make it too with a single tutorial. 
+Whatever  you don’t understand, you have to read some theory behind on 
+your own – I  will not explain theory, as I don’t master it either.</p>
+<p>We will use default configuration file for openssl, later you can 
+mess with your own. Check this command to learn where the default 
+openssl.conf is:</p>
+<div><div id="highlighter_737113" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl version -d</code></div></div></td></tr></tbody></table></div></div>
+<p>To go on, I presume you’re already in shell/console/whatever. Create some directory (I’ll use certtest) and go there.</p>
+<p><strong>Certificate Authority</strong></p>
+<p>First we need the <a sl-processed="1" href="http://en.wikipedia.org/wiki/Public-key_cryptography">key pair</a> for our authority – this is a critical file (if you were real authority that is). You can create <a sl-processed="1" href="http://www.madboa.com/geek/openssl/#key">more types of keys</a>, but experiments are for experts (see the word similarity?) so let’s go on with RSA key:</p>
+<div><div id="highlighter_222398" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl genrsa -out ca.key 1024</code></div></div></td></tr></tbody></table></div></div>
+<p>Now let’s create the root certificate:</p>
+<div><div id="highlighter_2873" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl req -new -x509 -days 3650 -key ca.key -out ca.crt</code></div><div class="line number2 index1 alt1"><code class="plain plain">You are about to be asked to enter information that will be incorporated into your certificate request.</code></div><div class="line number3 index2 alt2"><code class="plain plain">What you are about to enter is what is called a Distinguished Name or a DN.</code></div><div class="line number4 index3 alt1"><code class="plain plain">There are quite a few fields but you can leave some blank</code></div><div class="line number5 index4 alt2"><code class="plain plain">For some fields there will be a default value,</code></div><div class="line number6 index5 alt1"><code class="plain plain">If you enter '.', the field will be left blank.</code></div><div class="line number7 index6 alt2"><code class="plain plain">-----</code></div><div class="line number8 index7 alt1"><code class="plain plain">Country Name (2 letter code) [AU]:SK</code></div><div class="line number9 index8 alt2"><code class="plain plain">State or Province Name (full name) [Some-State]:Bratislava</code></div><div class="line number10 index9 alt1"><code class="plain plain">Locality Name (eg, city) []:Bratislava</code></div><div class="line number11 index10 alt2"><code class="plain plain">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Naive</code></div><div class="line number12 index11 alt1"><code class="plain plain">Organizational Unit Name (eg, section) []:CA</code></div><div class="line number13 index12 alt2"><code class="plain plain">Common Name (eg, YOUR name) []:CA Admin</code></div><div class="line number14 index13 alt1"><code class="plain plain">Email Address []:ca@naive.sk</code></div></div></td></tr></tbody></table></div></div>
+<p><em>(There  is actual naive.sk domain I have nothing to do with, but I
+ used Naive  as my “wannabe company” for years and I’ll not change 
+anything on it  now. Obviously, don’t mail there.)</em></p>
+<p>Now we have ca.crt  which is our root certificate. This will be the 
+file imported into  browser later. It contains public key and some other
+ information – and  it’s self signed (this is cause by -x509 option). If
+ you copy openssl.cnf to your certtest directory, you can change some 
+values there and questions for Locality, … will have better defaults. 
+Use -config  option in any openssl command (openssl command is the first
+ argument  after openssl command itself ;-)), check openssl 
+documentation for more  options, for instance this for all available 
+options for <a sl-processed="1" href="http://www.openssl.org/docs/apps/req.html">req command</a>.</p>
+<p>That’s  it! You are now well concealed certificate authority. Not 
+really, we  need a few more things for further steps. Let’s create some 
+directory  structure according to default openssl.cnf:</p>
+<div><div id="highlighter_313968" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ mkdir -p demoCA/newcerts</code></div></div></td></tr></tbody></table></div></div>
+<p>Now we need index and serial file for our CA:</p>
+<div><div id="highlighter_847325" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ touch demoCA/index.txt</code></div><div class="line number2 index1 alt1"><code class="plain plain">$ echo '01' &gt; demoCA/serial</code></div></div></td></tr></tbody></table></div></div>
+<p>And now we’re really done with setup of our CA with all things openssl needs.</p>
+<p><strong>Server certificate</strong></p>
+<p>First we need key pair for the server:</p>
+<div><div id="highlighter_791199" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl genrsa -out localhost.key 2048</code></div></div></td></tr></tbody></table></div></div>
+<p>We have to create so called certificate signing request (CSR) for our web server. Let’s try it:</p>
+<div><div id="highlighter_427960" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl req -new -key localhost.key -out localhost.csr</code></div><div class="line number2 index1 alt1"><code class="plain plain">You are about to be asked to enter information that will be incorporated</code></div><div class="line number3 index2 alt2"><code class="plain plain">into your certificate request.</code></div><div class="line number4 index3 alt1"><code class="plain plain">What you are about to enter is what is called a Distinguished Name or a DN.</code></div><div class="line number5 index4 alt2"><code class="plain plain">There are quite a few fields but you can leave some blank</code></div><div class="line number6 index5 alt1"><code class="plain plain">For some fields there will be a default value,</code></div><div class="line number7 index6 alt2"><code class="plain plain">If you enter '.', the field will be left blank.</code></div><div class="line number8 index7 alt1"><code class="plain plain">-----</code></div><div class="line number9 index8 alt2"><code class="plain plain">Country Name (2 letter code) [AU]:SK</code></div><div class="line number10 index9 alt1"><code class="plain plain">State or Province Name (full name) [Some-State]:Bratislava</code></div><div class="line number11 index10 alt2"><code class="plain plain">Locality Name (eg, city) []:Bratislava</code></div><div class="line number12 index11 alt1"><code class="plain plain">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Other Company</code></div><div class="line number13 index12 alt2"><code class="plain plain">Organizational Unit Name (eg, section) []:IT</code></div><div class="line number14 index13 alt1"><code class="plain plain">Common Name (eg, YOUR name) []:localhost</code></div><div class="line number15 index14 alt2"><code class="plain plain">Email Address []:admin@other.sk</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="plain plain">Please enter the following 'extra' attributes</code></div><div class="line number18 index17 alt1"><code class="plain plain">to be sent with your certificate request</code></div><div class="line number19 index18 alt2"><code class="plain plain">A challenge password []:</code></div><div class="line number20 index19 alt1"><code class="plain plain">An optional company name []:</code></div></div></td></tr></tbody></table></div></div>
+<p>YOU  MUST use your server name in common name, otherwise someone will
+  complain about it (browser definitely, but there are some servers that
+  refuses to start too). In this case I use localhost, which is good 
+enough for local tests, but not good enough for remote access to your 
+computer. You can use yourhost.yourdomain instead, then maybe you want 
+to use the same pattern in file names.</p>
+<p>Now  we’ll “send this CSR file to our CA” (but we’re mixing it in one
+  directory anyway, what a mess!) and our CA will issue the certificate 
+ for us:</p>
+<div><div id="highlighter_249351" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl ca -keyfile ca.key -cert ca.crt -out localhost.crt -infiles localhost.csr</code></div><div class="line number2 index1 alt1"><code class="plain plain">Using configuration from /usr/lib/ssl/openssl.cnf</code></div><div class="line number3 index2 alt2"><code class="plain plain">Check that the request matches the signature</code></div><div class="line number4 index3 alt1"><code class="plain plain">Signature ok</code></div><div class="line number5 index4 alt2"><code class="plain plain">The organizationName field needed to be the same in the</code></div><div class="line number6 index5 alt1"><code class="plain plain">CA certificate (Naive) and the request (Other Company)</code></div></div></td></tr></tbody></table></div></div>
+<p>Because  attributes (Locality, State, …) on the server certificate 
+will not  match CA certificate (why should they?) we have to choose 
+other than  default matching policy. Check config file to find those 
+policies.  Additional option will resolve the situation – but don’t add 
+-policy at the end:</p>
+<div><div id="highlighter_152424" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl ca -keyfile ca.key -cert ca.crt -out localhost.crt -policy policy_anything -infiles localhost.csr</code></div><div class="line number2 index1 alt1"><code class="plain plain">Using configuration from /usr/lib/ssl/openssl.cnf</code></div><div class="line number3 index2 alt2"><code class="plain plain">Check that the request matches the signature</code></div><div class="line number4 index3 alt1"><code class="plain plain">Signature ok</code></div><div class="line number5 index4 alt2"><code class="plain plain">Certificate Details:</code></div><div class="line number6 index5 alt1"><code class="plain plain">...too long</code></div><div class="line number7 index6 alt2"><code class="plain plain">Sign the certificate? [y/n]:y</code></div></div></td></tr></tbody></table></div></div>
+<div><div id="highlighter_430364" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">1 out of 1 certificate requests certified, commit? [y/n]y</code></div><div class="line number2 index1 alt1"><code class="plain plain">Write out database with 1 new entries</code></div><div class="line number3 index2 alt2"><code class="plain plain">Data Base Updated</code></div></div></td></tr></tbody></table></div></div>
+<p>Now we’re talking! Let’s create client certificate before we leave openssl and move to Java stuff!</p>
+<p><strong>Client certificate</strong></p>
+<p>What a surprise – first step is creating key-pair for our client. That is you as a person this time.</p>
+<div><div id="highlighter_333473" class="syntaxhighlighter  plain "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl genrsa -out client.key 2048</code></div></div></td></tr></tbody></table></div></div>
+<p>Now we create another certificate request:</p>
+<div><div id="highlighter_200700" class="syntaxhighlighter  plain "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl req -new -key client.key -out client.csr</code></div><div class="line number2 index1 alt1"><code class="plain plain">You are about to be asked to enter information that will be incorporated</code></div><div class="line number3 index2 alt2"><code class="plain plain">into your certificate request.</code></div><div class="line number4 index3 alt1"><code class="plain plain">What you are about to enter is what is called a Distinguished Name or a DN.</code></div><div class="line number5 index4 alt2"><code class="plain plain">There are quite a few fields but you can leave some blank</code></div><div class="line number6 index5 alt1"><code class="plain plain">For some fields there will be a default value,</code></div><div class="line number7 index6 alt2"><code class="plain plain">If you enter '.', the field will be left blank.</code></div><div class="line number8 index7 alt1"><code class="plain plain">-----</code></div><div class="line number9 index8 alt2"><code class="plain plain">Country Name (2 letter code) [AU]:SK</code></div><div class="line number10 index9 alt1"><code class="plain plain">State or Province Name (full name) [Some-State]:Bratislava</code></div><div class="line number11 index10 alt2"><code class="plain plain">Locality Name (eg, city) []:Bratislava</code></div><div class="line number12 index11 alt1"><code class="plain plain">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Other Company</code></div><div class="line number13 index12 alt2"><code class="plain plain">Organizational Unit Name (eg, section) []:stuff</code></div><div class="line number14 index13 alt1"><code class="plain plain">Common Name (eg, YOUR name) []:Richard Richter</code></div><div class="line number15 index14 alt2"><code class="plain plain">Email Address []:richter@other.sk</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="plain plain">Please enter the following 'extra' attributes</code></div><div class="line number18 index17 alt1"><code class="plain plain">to be sent with your certificate request</code></div><div class="line number19 index18 alt2"><code class="plain plain">A challenge password []:</code></div><div class="line number20 index19 alt1"><code class="plain plain">An optional company name []:</code></div></div></td></tr></tbody></table></div></div>
+<p>As  you see, common name is real name, it’s obviously someone’s 
+personal  certificate. I think you can somehow specify the purpose of 
+the  certificate (server, client, …) but we just created both of them 
+the  same way. You can study details later (as I need to as well).</p>
+<p>Now our CA will sign our request and we get the certificate:</p>
+<div><div id="highlighter_556057" class="syntaxhighlighter  plain  "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl ca -keyfile ca.key -cert ca.crt -out client.crt -policy policy_anything -infiles client.csr</code></div><div class="line number2 index1 alt1"><code class="plain plain">...</code></div><div class="line number3 index2 alt2"><code class="plain plain">$ ls -R</code></div><div class="line number4 index3 alt1"><code class="plain plain">.:</code></div><div class="line number5 index4 alt2"><code class="plain plain">ca.crt
+ &nbsp;ca.key &nbsp;client.crt &nbsp;client.csr &nbsp;client.key 
+&nbsp;demoCA &nbsp;localhost.crt &nbsp;localhost.csr &nbsp;localhost.key</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="plain plain">./demoCA:</code></div><div class="line number8 index7 alt1"><code class="plain plain">index.txt &nbsp;index.txt.attr &nbsp;index.txt.attr.old &nbsp;index.txt.old &nbsp;newcerts &nbsp;serial &nbsp;serial.old</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="plain plain">./demoCA/newcerts:</code></div><div class="line number11 index10 alt2"><code class="plain plain">01.pem &nbsp;02.pem</code></div></div></td></tr></tbody></table></div></div>
+<p>We will not need certificates in PEM format so you don’t have to care
+ about files under demoCA at all. All our *.crt files are in our 
+certtest directory.</p>
+<p><strong>PKCS#12</strong></p>
+<p>We  will use openssl for one last step now. To use certificates in 
+Java  keystores and also for client certificate import into Firefox, we 
+need  to create <a sl-processed="1" href="http://en.wikipedia.org/wiki/PKCS12">PKCS#12</a>
+ files that combine certificate with its private key. Obviously these  
+files carry important information. We will use password to protect them.
+  Password is optional when you create PKCS#12 file, but is required in 
+ both imports (to JKS and Firefox). Let’s do it:</p>
+<div><div id="highlighter_471226" class="syntaxhighlighter  plain  "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl pkcs12 -export -in localhost.crt -inkey localhost.key -out localhost.p12 -name sercer</code></div><div class="line number2 index1 alt1"><code class="plain plain">Enter Export Password: (asdf &lt;img src="<a href="http://s1.wp.com/wp-includes/images/smilies/icon_wink.gif?m=1129645325g">http://s1.wp.com/wp-includes/images/smilies/icon_wink.gif?m=1129645325g</a>" alt=";-)" class="wp-smiley"&gt;&nbsp; no one can see anyway)</code></div><div class="line number3 index2 alt2"><code class="plain plain">Verifying - Enter Export Password: (the same again)</code></div></div></td></tr></tbody></table></div></div>
+<p>Password is important only for this file. Let’s repeat it with client certificate:</p>
+<div><div id="highlighter_394528" class="syntaxhighlighter  plain   "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ openssl pkcs12 -export -in client.crt -inkey client.key -out client.p12 -name client</code></div></div></td></tr></tbody></table></div></div>
+<p>Aliases sercer and client are important to remember (especially sercer).</p>
+<p><strong>Server configration</strong></p>
+<p>First we have to have keytool from &lt;JDK1.6&gt;/bin/ directory on 
+the path. Important thing is to have JDK 1.6 – just run keytool and it 
+has to show you the help and in that help you have to see 
+-importkeystore  sub-command among others. In dark times before JDK 1.6 
+people had to  use other tools or own programs to import PKCS#12 files 
+into JKS files.  JKS stands for Java KeyStore – and it’s the file format
+ that Java uses  to – you guessed it – store keys! And certificates too.
+ (Some  mostly hi-end products use certutil tool that has different 
+keystore  format using *.db suffix. It’s solution used before by 
+Netscape,  enterprise editions of some appservers, etc. You can google 
+details if  you’re in dire need.)</p>
+<p>So you have unzipped Tomcat 6 somewhere, let’s go to the directory 
+and there into conf directory. Let’s start with SSL configuration 
+without client authorization – nicely step by step. Edit server.xml and 
+find section containing:</p>
+<div><div id="highlighter_780230" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">Connector port="8443"</code></div></div></td></tr></tbody></table></div></div>
+<p>The  whole XML tag is probably commented out so remove &lt;!– and 
+–&gt; to  make it active and also add keystore attributes – it will look
+ like  this:</p>
+<div><div id="highlighter_726963" class="syntaxhighlighter  xml  "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">Connector</code> <code class="xml color1">port</code><code class="xml plain">=</code><code class="xml string">"8443"</code> <code class="xml color1">protocol</code><code class="xml plain">=</code><code class="xml string">"HTTP/1.1"</code> <code class="xml color1">SSLEnabled</code><code class="xml plain">=</code><code class="xml string">"true"</code></div><div class="line number2 index1 alt1"><code class="xml color1">maxThreads</code><code class="xml plain">=</code><code class="xml string">"150"</code> <code class="xml color1">scheme</code><code class="xml plain">=</code><code class="xml string">"https"</code> <code class="xml color1">secure</code><code class="xml plain">=</code><code class="xml string">"true"</code></div><div class="line number3 index2 alt2"><code class="xml color1">keystoreFile</code><code class="xml plain">=</code><code class="xml string">"d:/work/apache-tomcat-6.0.29/conf/keystore.jks"</code> <code class="xml color1">keystorePass</code><code class="xml plain">=</code><code class="xml string">"changeit"</code></div><div class="line number4 index3 alt1"><code class="xml color1">clientAuth</code><code class="xml plain">=</code><code class="xml string">"false"</code> <code class="xml color1">sslProtocol</code><code class="xml plain">=</code><code class="xml string">"TLS"</code> <code class="xml plain">/&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p>Of course use your path to your tomcat’s conf dir. Now we’re missing 
+just the keystore JKS. Let’s create it (you are in conf dir, right?):</p>
+<div><div id="highlighter_279255" class="syntaxhighlighter  plain "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$&nbsp;
+ keytool -importkeystore -deststorepass changeit -destkeypass 
+changeit&nbsp; -destkeystore keystore.jks -srckeystore 
+../../certtest/localhost.p12&nbsp; -srcstoretype PKCS12 -alias sercer</code></div><div class="line number2 index1 alt1"><code class="plain plain">Enter source keystore password: (famous asdf password goes here)</code></div></div></td></tr></tbody></table></div></div>
+<p>Use  the alias and password that you provided when you created 
+PKCS#12 file.  Of course, we’re working on the server now, so use 
+server’s .p12  file, not the client one. This is the certificate that 
+server sends to  the browser (but without private key of course, that is
+ used for server  part only). Restart the Tomcat (check console window 
+for any errors,  there should be none) and access <a sl-processed="1" href="https://localhost:8443/">https://localhost:8443</a>
+ to find out if it works. Browser should have some trust problems, but  
+when you add exception (uncheck permanent for now!) you should see  
+Tomcat homepage.</p>
+<p>SSL is running! Congratulations!</p>
+<p><strong>Browser and CA certificate</strong></p>
+<p>To trust our server certificate we have to import ca.crt  file into 
+the browser. I’ll use Firefox and show no images, sorry. You  can find 
+many fancy examples elsewhere anyway. IE shares certificates  with other
+ Windows (or rather say MS) programs, but Firefox has its own  store.</p>
+<p>Select Tools in main menu, and Options down there. Options window 
+will appear. Select Advanced in top row of icons and then Encryption tab
+ under icons. You should have both Protocols check on. Let’s click View 
+Certificates button – Certificate Manager window will open. There you 
+have 5 tabs up there – and we want to add CA certificate, so click 
+Authorities. There are many of them predefined (big one, commercial), 
+let’s import yours – click Import button, browse your ca.crt and add it.
+ On the import dialog (Downloading Certificate) check the first option 
+(Trust this CA to identify web sites), or check everything as you wish. 
+Now OK all those windows.</p>
+<p>Try  HTTPS connection to localhost:8443 again – if you see the 
+warning, try  to close the Firefox and open it again (it’s reluctant to 
+learn new  certificates or forget removed ones sometimes).</p>
+<p>Now you should have trusted SSL site up &amp; running!</p>
+<p><strong>Client certificate</strong></p>
+<p>Now change the server configuration to require client authentication:</p>
+<div><div id="highlighter_433332" class="syntaxhighlighter  xml "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">Connector</code> <code class="xml color1">port</code><code class="xml plain">=</code><code class="xml string">"8443"</code> <code class="xml color1">protocol</code><code class="xml plain">=</code><code class="xml string">"HTTP/1.1"</code> <code class="xml color1">SSLEnabled</code><code class="xml plain">=</code><code class="xml string">"true"</code></div><div class="line number2 index1 alt1"><code class="xml color1">maxThreads</code><code class="xml plain">=</code><code class="xml string">"150"</code> <code class="xml color1">scheme</code><code class="xml plain">=</code><code class="xml string">"https"</code> <code class="xml color1">secure</code><code class="xml plain">=</code><code class="xml string">"true"</code></div><div class="line number3 index2 alt2"><code class="xml color1">truststoreFile</code><code class="xml plain">=</code><code class="xml string">"d:/work/apache-tomcat-6.0.29/conf/cacerts.jks"</code> <code class="xml color1">truststorePass</code><code class="xml plain">=</code><code class="xml string">"changeit"</code></div><div class="line number4 index3 alt1"><code class="xml color1">keystoreFile</code><code class="xml plain">=</code><code class="xml string">"d:/work/apache-tomcat-6.0.29/conf/keystore.jks"</code> <code class="xml color1">keystorePass</code><code class="xml plain">=</code><code class="xml string">"changeit"</code></div><div class="line number5 index4 alt2"><code class="xml color1">clientAuth</code><code class="xml plain">=</code><code class="xml string">"true"</code> <code class="xml color1">sslProtocol</code><code class="xml plain">=</code><code class="xml string">"TLS"</code> <code class="xml plain">/&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p>Attribute clientAuth=”true”  is important and there are new 
+attributes for truststore JKS where we  need to import CA certificate. 
+Some servers may require CA certificate  for previous steps too (and 
+will refuse to start otherwise), Tomcat is  ok just with server 
+certificate for SSL when you don’t use client  certificates. But it 
+needs CA for client certificates because otherwise  browser can’t know 
+which client certificate to send. (And even if client  sent all of them –
+ which is not logical in the first place – server  couldn’t verify them 
+anyway.) Creating cacerts.jks is a bit different than than keystore.jks:</p>
+<div><div id="highlighter_262450" class="syntaxhighlighter  plain  "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ keytool -import -keystore cacerts.jks -storepass changeit -alias my_ca -file ../../certtest/ca.crt</code></div><div class="line number2 index1 alt1"><code class="plain plain">Owner: EMAILADDRESS=ca@naive.sk, CN=CA Admin, OU=CA, O=Naive, L=Bratislava, ST=Bratislava, C=SK</code></div><div class="line number3 index2 alt2"><code class="plain plain">...too long...</code></div><div class="line number4 index3 alt1"><code class="plain plain">Trust this certificate? [no]: &nbsp;yes</code></div><div class="line number5 index4 alt2"><code class="plain plain">Certificate was added to keystore</code></div></div></td></tr></tbody></table></div></div>
+<p>For  obvious reasons you can’t have PKCS#12 file with CA private key,
+ only  the certificate itself is important here. You have to trust the  
+certificate, otherwise it’s not trusted certificate – which it has to  
+be. Password “changeit” can be changed, just change it in server.xml as 
+well. You can change the password of JKS any time later with keytool as 
+well. BTW: alias (my_ca in our example) can be anything you like.</p>
+<p>Restart the Tomcat and try HTTPS access. You will learn that:</p>
+<p><em>SSL peer cannot verify your certificate.<br>
+(Error code: ssl_error_bad_cert_alert)</em></p>
+<p>Time to fix it in the browser. Open that Certificate Manager again 
+and this time go to Your Certificates tab, hit Import button, select 
+client.p12  file (it will show you only PKCS#12 files this time) and 
+enter password  you entered when you created the file (asdf?). Try to 
+access HTTPS  again. It should work (if not, restart Firefox again). In 
+case you  selected check box saying you will select the client 
+certificate to be  sent to the server, you’ll see dialog to choose one 
+(here you can see  alias of the certificate – probably “client” in our 
+example – along with  its serial number) – but it should work like a 
+charm automagically too.</p>
+<p>If you ask: “Do I need two different JKS files?”</p>
+<p>Answer  is: “No, you can use just keystore.jks for both purposes.” 
+And I don’t  know why to separate them, but it’s probably done for 
+reason. Most  servers already have those files separated, certutil  uses
+ also two files in most applications/examples – there is probably  some 
+nice reason. But technically you don’t need it, at least not in our  
+case. <img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/icon_smile.gif" alt=":-)" class="wp-smiley">
+  Don’t forget to change it in server.xml too if you decide so. After 
+adding both ca.crt and localhost.p12 into single JKS you can see 
+something like this:</p>
+<div><div id="highlighter_860679" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ keytool -list -keystore keystore.jks</code></div><div class="line number2 index1 alt1"><code class="plain plain">Enter keystore password: &nbsp;(changeit, of course)</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="plain plain">Keystore type: JKS</code></div><div class="line number5 index4 alt2"><code class="plain plain">Keystore provider: SUN</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="plain plain">Your keystore contains 2 entries</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="plain plain">my_ca, Aug 23, 2010, trustedCertEntry,</code></div><div class="line number10 index9 alt1"><code class="plain plain">Certificate fingerprint (MD5): BF:64:56:47:2E:B5:80:B6:F6:78:4B:8D:5B:AF:6E:0F</code></div><div class="line number11 index10 alt2"><code class="plain plain">sercer, Aug 23, 2010, PrivateKeyEntry,</code></div><div class="line number12 index11 alt1"><code class="plain plain">Certificate fingerprint (MD5): C2:0B:F0:2F:D9:E8:9E:89:43:CF:E4:AF:38:B3:CB:BB</code></div></div></td></tr></tbody></table></div></div>
+<p>Now we’re done unless we want to utilize the user information from the certificate in our program. And we want!</p>
+<p><strong>Identifying user in an application</strong></p>
+<p>Let’s write some uber application – no zip download required! Go to tomcat’s webapps directory and follow me:</p>
+<div><div id="highlighter_890968" class="syntaxhighlighter  plain "><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">$ mkdir -p certreader/WEB-INF</code></div></div></td></tr></tbody></table></div></div>
+<p>Now  you have the whole structure of the application done, let’s 
+create two  more files. This goes into certreader/WEB-INF/web.xml (now 
+in Java EE 6 –  or Tomcat 7 – you can omit this!):</p>
+<div><div id="highlighter_983246" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">web-app</code> <code class="xml color1">xmlns</code><code class="xml plain">=</code><code class="xml string">"<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a>"</code></div><div class="line number2 index1 alt1"><code class="xml color1">xmlns:xsi</code><code class="xml plain">=</code><code class="xml string">"<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>"</code></div><div class="line number3 index2 alt2"><code class="xml color1">xsi:schemaLocation</code><code class="xml plain">=</code><code class="xml string">"<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a> <a href="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd</a>"</code></div><div class="line number4 index3 alt1"><code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"2.5"</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">display-name</code><code class="xml plain">&gt;Cert test&lt;/</code><code class="xml keyword">display-name</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">web-app</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p>And this goes into certreader/index.jsp:</p>
+<div><div id="highlighter_503001" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">&lt;%@page import="java.security.cert.X509Certificate"%&gt;</code></div><div class="line number2 index1 alt1"><code class="plain plain">&lt;%</code></div><div class="line number3 index2 alt2"><code class="plain plain">Object o = request.getAttribute("javax.servlet.request.X509Certificate");</code></div><div class="line number4 index3 alt1"><code class="plain plain">if (o != null) {</code></div><div class="line number5 index4 alt2"><code class="plain plain">X509Certificate certs[] = (X509Certificate[]) o;</code></div><div class="line number6 index5 alt1"><code class="plain plain">X509Certificate cert = certs[0];</code></div><div class="line number7 index6 alt2"><code class="plain plain">%&gt;</code></div><div class="line number8 index7 alt1"><code class="plain plain">&lt;%= cert.getSubjectDN().getName() %&gt;</code></div><div class="line number9 index8 alt2"><code class="plain plain">&lt;%</code></div><div class="line number10 index9 alt1"><code class="plain plain">} else {</code></div><div class="line number11 index10 alt2"><code class="plain plain">%&gt;</code></div><div class="line number12 index11 alt1"><code class="plain plain">Object was null.</code></div><div class="line number13 index12 alt2"><code class="plain plain">&lt;%</code></div><div class="line number14 index13 alt1"><code class="plain plain">}</code></div><div class="line number15 index14 alt2"><code class="plain plain">%&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p>You may need to restart Tomcat 6, if you did this too slowly (like more than a second or so). After that go to <a sl-processed="1" href="https://localhost:8443/certreader/">https://localhost:8443/certreader/</a> – index.jsp will kick in and you should see something like:</p>
+<p><em>EMAILADDRESS=richter@other.sk, CN=Richard Richter, OU=stuff, O=Other Company, L=Bratislava, ST=Bratislava, C=SK</em></p>
+<p>Isn’t this just ****ing beautiful? I can tell you I was stuck for days just to get here and I love it now.</p>
+<p><strong>Client authentication – want or true?</strong></p>
+<p>Depends.  True means you have to provide client certificate (server 
+strictly  requires it). But imagine you have an application with some 
+public stuff  as well – then go for “want” value. Change your server.xml
+ and restart the Tomcat. My Firefox still shows my certification 
+details, but Chrome (without client certification) just says:</p>
+<p><em>Object was null.</em></p>
+<p>So  now you can have different content for different users (and they 
+say  one’s life has equal value!). Anyway, sorry for such a long post, 
+but if  other guides didn’t help and this one did… I’m happy for you. 
+Now I’m  definitely happy for myself. <img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/icon_smile.gif" alt=":-)" class="wp-smiley"> </p>
+
+<div class="wpa" style="position: relative; width:300px; text-align: center; padding: 0; margin: 10px auto; overflow: hidden; clear: both;">
+<a sl-processed="1" style="position: absolute; text-align: left; display: block; font: 9px/1 sans-serif; text-decoration: underline;" href="http://en.wordpress.com/about-these-ads/" rel="nofollow">About these ads</a>
+<script type="text/javascript">
+		var wpcom_adclk_hovering = false;
+		var wpcom_adclk_recorded = false;
+		var wpcom_adclk_theme = "Enterprise";
+		var wpcom_adclk_slot = "wpcom_below_post";
+		var wpcom_adclk_network = ( typeof wpcom_adclk_network === "undefined" ) ? "" : wpcom_adclk_network ;
+
+		jQuery(document).ready( function() {
+			function wpcom_adclk_hover_yes() { wpcom_adclk_hovering = true; }
+			function wpcom_adclk_hover_no() { wpcom_adclk_hovering = false; }
+			jQuery(".wpa").click(wpcom_adclk_click);
+			jQuery(".wpa iframe").hover( wpcom_adclk_hover_yes, wpcom_adclk_hover_no );
+			jQuery(".wpa object").hover( wpcom_adclk_hover_yes, wpcom_adclk_hover_no );
+
+			jQuery(window).blur( function() {
+				if ( wpcom_adclk_hovering ) { wpcom_adclk_click(); }
+			});
+		});
+
+		function wpcom_adclk_impression() {
+			var stat_gif = document.location.protocol + "//stats.wordpress.com/g.gif?v=wpcom-no-pv";
+			stat_gif += "&x_ads_imp_theme=" + wpcom_adclk_theme;
+			stat_gif += "&x_ads_imp_placement="+wpcom_adclk_slot;
+			stat_gif += "&x_ads_imp_network=" + wpcom_adclk_network;
+			stat_gif += "&x_ads_imp_theme_network="+wpcom_adclk_theme+"_"+wpcom_adclk_network;
+			new Image().src = stat_gif + "&baba=" + Math.random();
+			return true;
+		}
+
+		function wpcom_adclk_click() {
+			if (wpcom_adclk_recorded) { return true; } // no double counting
+			var stat_gif = document.location.protocol + "//stats.wordpress.com/g.gif?v=wpcom-no-pv";
+			stat_gif += "&x_ads_click_theme=" + wpcom_adclk_theme;
+			stat_gif += "&x_ads_click_placement="+wpcom_adclk_slot;
+			stat_gif += "&x_ads_click_network=" + wpcom_adclk_network;
+			stat_gif += "&x_ads_click_theme_network="+wpcom_adclk_theme+"_"+wpcom_adclk_network;
+
+			new Image().src = stat_gif + "&baba=" + Math.random();
+			wpcom_adclk_recorded = true;
+			var now=new Date(); var end=now.getTime()+250;
+			while(true){now=new Date();if(now.getTime()>end){break;}}
+			return true;
+		}
+	
+if ( typeof GA_googleAddAttr == 'function' ) {
+GA_googleAddAttr("AdOpt", "1");
+GA_googleAddAttr("Origin", "other");
+GA_googleAddAttr("LangId", "1");
+GA_googleAddAttr("Domain", "virgo47.wordpress.com");
+GA_googleAddAttr("BlogId", "2988789");
+GA_googleAddAttr("PageURL", "http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/");
+GA_googleAddAttr("Autotag", "technology");
+GA_googleAddAttr("Tag", "java");
+GA_googleAddAttr("Tag", "software");
+GA_googleAddAttr("Tag", "authority");
+GA_googleAddAttr("Tag", "ca");
+GA_googleAddAttr("Tag", "certificates");
+GA_googleAddAttr("Tag", "client-authorization");
+GA_googleAddAttr("Tag", "client-certificate");
+GA_googleAddAttr("Tag", "jks");
+GA_googleAddAttr("Tag", "keytool");
+GA_googleAddAttr("Tag", "openssl");
+GA_googleAddAttr("Tag", "tomcat");
+GA_googleAddAttr("Tag", "x509");
+GA_googleAddAttr("theme_bg", "f0f0f0");
+GA_googleAddAttr("theme_border", "cccccc");
+GA_googleAddAttr("theme_text", "555555");
+GA_googleAddAttr("theme_link", "008DCF");
+GA_googleAddAttr("theme_url", "008DCF");
+GA_googleAddAdSensePageAttr("google_page_url", "http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/");
+GA_googleFillSlot("wpcom_below_post");
+}
+</script><script src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/ads"></script><div id="google_ads_div_wpcom_below_post_ad_wrapper">
+<div id="google_ads_div_wpcom_below_post_ad_container" style="display:inline-block;"><script type="text/javascript">
+    try {
+        window.top.amznads.renderAd(document, "a300x250p9");
+    } catch(e) { /*ignore*/}
+</script><iframe src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/impi.html" marginwidth="0" marginheight="0" frameborder="0" height="250" scrolling="no" width="300"></iframe>
+
+</div>
+</div>
+
+</div>
+<style type="text/css">
+div.wpa>div { margin-top: 1em; } #google_ads_div_wpcom_below_post_adsafe_ad_container { display: block !important; }
+</style>
+<script type="text/javascript">
+jQuery( window ).load( function() {
+    if ( jQuery(".wpa script[src*='shareth.ru']").length > 0 || jQuery(".wpa iframe[src*='boomvideo.tv']").length > 0 || jQuery(".wpa iframe[src*='viewablemedia.net']").length > 0 || jQuery(".wpa .sharethrough-placement").length > 0 ) {
+        jQuery( '.wpa' ).css( 'width', '400px' );
+    }
+setTimeout(function(){if(typeof GS_googleAddAdSenseService !== 'function'){new Image().src=document.location.protocol+"//stats.wordpress.com/g.gif?v=wpcom-no-pv&x_noads=adblock&baba="+Math.random()}},100);
+} );
+</script>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-google-plus-1"><a sl-processed="1" rel="nofollow" class="share-google-plus-1 sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=google-plus-1&amp;nb=1" title="Click to share on Google+" id="sharing-google-459"><span>Google</span></a></li><li class="share-digg"><a sl-processed="1" rel="nofollow" class="share-digg sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=digg&amp;nb=1" title="Click to Digg this post"><span>Digg</span></a></li><li class="share-twitter"><a sl-processed="1" rel="nofollow" class="share-twitter sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=twitter&amp;nb=1" title="Click to share on Twitter" id="sharing-twitter-459"><span>Twitter<span class="share-count">1</span></span></a></li><li class="share-facebook"><a sl-processed="1" rel="nofollow" class="share-facebook sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=facebook&amp;nb=1" title="Share on Facebook" id="sharing-facebook-459"><span>Facebook<span class="share-count">1</span></span></a></li><li><a sl-processed="1" href="#" class="sharing-anchor sd-button share-more"><span>More</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-linkedin"><a sl-processed="1" rel="nofollow" class="share-linkedin sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=linkedin&amp;nb=1" title="Click to share on LinkedIn" id="sharing-linkedin-459"><span>LinkedIn<span class="share-count">1</span></span></a></li><li class="share-pinterest"><a sl-processed="1" rel="nofollow" class="share-pinterest sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=pinterest&amp;nb=1" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-end"></li><li class="share-reddit"><a sl-processed="1" rel="nofollow" class="share-reddit sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=reddit&amp;nb=1" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-stumbleupon"><a sl-processed="1" rel="nofollow" class="share-stumbleupon sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=stumbleupon&amp;nb=1" title="Click to share on StumbleUpon"><span>StumbleUpon</span></a></li><li class="share-end"></li><li class="share-tumblr"><a sl-processed="1" rel="nofollow" class="share-tumblr sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=tumblr&amp;nb=1" title="Click to share on Tumblr"><span>Tumblr</span></a></li><li class="share-email share-service-visible"><a sl-processed="1" rel="nofollow" class="share-email sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?share=email&amp;nb=1" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-end"></li><li class="share-print"><a sl-processed="1" rel="nofollow" class="share-print sd-button share-icon" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#print" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div></div></div>
+<div style="display: block;" id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<p class="jp-relatedposts-post jp-relatedposts-post0" data-post-format="false"><strong class="jp-relatedposts-post-title"><a href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?relatedposts_to=381&amp;relatedposts_order=0" title="Google Chrome with perspective
+
+I can hardly believe that it's almost a year I started to use Google Chrome browser! While I still use it at home I decided to switch back to Firefox at work - for a simple reason. Chrome is very stubborn when accessing https sites without proper certificate. We have a few on our corporate…" rel="nofollow">Google Chrome with perspective</a></strong><br><span>In "java"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-format="false"><strong class="jp-relatedposts-post-title"><a href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?relatedposts_to=617&amp;relatedposts_order=1" title="Three years with Java Simon (4)
+
+Today I'd like to cover the rest of my Java Simon story. In the previous posts we talked hardly about the start, but the rest was actually quite quick. With Callbacks, JMX support, JDBC proxy driver and much better design we were ready to release our 2.0 version. June 23, 2009, Java Simon 2.0, monitoring…" rel="nofollow">Three years with Java Simon (4)</a></strong><br><span>In "java"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-format="false"><strong class="jp-relatedposts-post-title"><a href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?relatedposts_to=171&amp;relatedposts_order=2" title="Java Simon 1.0, monitoring API, released
+
+It is some time ago when we wanted to use JaMON API to add some monitoring capabilities to our applications. After a few we found it to lack some featrues - especially it was difficult to organize monitors. Hence we decided to create our own alternative that brings two features JaMON can't provide - monitors…" rel="nofollow">Java Simon 1.0, monitoring API, released</a></strong><br><span>In "java"</span></p></div></div><div class="clear"></div>
+					
+					<!--
+					<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+			xmlns:dc="http://purl.org/dc/elements/1.1/"
+			xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+		<rdf:Description rdf:about="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/"
+    dc:identifier="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/"
+    dc:title="Tomcat web application with SSL client&nbsp;certificates"
+    trackback:ping="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/trackback/" />
+</rdf:RDF>					-->
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a sl-processed="1" href="http://virgo47.wordpress.com/category/java/" title="View all posts in java" rel="category tag">java</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/category/software/" title="View all posts in software" rel="category tag">software</a></span>
+						<span class="tags">Tagged with <a sl-processed="1" href="http://virgo47.wordpress.com/tag/authority/" rel="tag">authority</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/ca/" rel="tag">ca</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/certificates/" rel="tag">certificates</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/client-authorization/" rel="tag">client authorization</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/client-certificate/" rel="tag">client certificate</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/jks/" rel="tag">jks</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/keytool/" rel="tag">keytool</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/openssl/" rel="tag">openssl</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/tomcat/" rel="tag">tomcat</a>, <a sl-processed="1" href="http://virgo47.wordpress.com/tag/x509/" rel="tag">x509</a></span>					</p>
+				</div>
+
+			</div>
+
+						<div class="author-box">
+				<p><img id="grav-af081c81efc82a005def915cde584475-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_003.jpeg" class="avatar avatar-70 grav-hashed grav-hijack" height="70" width="70"><strong>About virgo47</strong><br>Java
+ Developer by profession in the first place. Gamer and amateur musician.
+ And father too. Naive believer in brighter future. Step by step.</p>
+			</div>
+			
+						<p></p>
+
+			<div id="comments">
+	
+
+	<h3 id="comments-title">33 Responses to <em>Tomcat web application with SSL client&nbsp;certificates</em>	</h3>
+
+	<ol class="commentlist snap_preview">
+				<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-319">
+		<div id="comment-319">
+		<div class="comment-author vcard">
+			<img id="grav-false-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Anonymous</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-319">September 9, 2010 at 12:09</a></div>
+
+		<div class="comment-body"><p>Great Post !</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=319#respond" onclick='return addComment.moveForm("comment-319", "319", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-321">
+		<div id="comment-321">
+		<div class="comment-author vcard">
+			<img id="grav-6a0ae53a44d225df2df74d88fceae9bd-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/6a0ae53a44d225df2df74d88fceae9bd.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">nikitadb</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-321">October 5, 2010 at 21:55</a></div>
+
+		<div class="comment-body"><p>Thank you so much for posting this 
+article. I scratch my head for several days to get this thing to work. 
+Now, I can have good sleep. Thank you for sharing your knowledge. With 
+much appreciation.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=321#respond" onclick='return addComment.moveForm("comment-321", "321", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="post pingback">
+		<p>Pingback: <a sl-processed="1" href="http://wiki.vontu.corp/display/QA/OpenSSL+And+AGRA" rel="external nofollow" class="url">Confluence: Quality Assurance</a></p>
+	</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-331">
+		<div id="comment-331">
+		<div class="comment-author vcard">
+			<img id="grav-cc2c403e35d3238011a65769ad4f2ba4-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/cc2c403e35d3238011a65769ad4f2ba4.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Markus K.</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-331">November 12, 2010 at 15:33</a></div>
+
+		<div class="comment-body"><p>As Dirty Harry phrased it: “Go ahead, make my day…”. You did, really! Thanks a lot!</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=331#respond" onclick='return addComment.moveForm("comment-331", "331", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-361">
+		<div id="comment-361">
+		<div class="comment-author vcard">
+			<img id="grav-false-1" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">jb</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-361">January 1, 2011 at 15:41</a></div>
+
+		<div class="comment-body"><p>Thank you so much !!! Great work !!! *THUMBS-UP*</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=361#respond" onclick='return addComment.moveForm("comment-361", "361", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-375">
+		<div id="comment-375">
+		<div class="comment-author vcard">
+			<img id="grav-9991513a5a87be6f7b41f7dd10a6d1c6-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/9991513a5a87be6f7b41f7dd10a6d1c6.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">gt</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-375">February 20, 2011 at 11:27</a></div>
+
+		<div class="comment-body"><p>Thanks a lot</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=375#respond" onclick='return addComment.moveForm("comment-375", "375", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="post pingback">
+		<p>Pingback: <a sl-processed="1" href="http://www.java-forums.org/new-java/44961-why-does-jsp-page-show-only-code-when-website-hit.html#post213115" rel="external nofollow" class="url">Why does .jsp page show only code when the website is hit.</a></p>
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-482">
+		<div id="comment-482">
+		<div class="comment-author vcard">
+			<img id="grav-662266d5c35ced0b5356ad7d458c4651-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/662266d5c35ced0b5356ad7d458c4651.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://gravatar.com/cobaltnightsky" rel="external nofollow" class="url">cobaltnightsky</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-482">June 14, 2011 at 11:01</a></div>
+
+		<div class="comment-body"><p>Thanks very much for your guideline, it’s very useful to me as I am working on these kind of things</p>
+<p>to answer the: “And I don’t know why to separate them, but it’s probably done for reason”<br>
+I might have found the reason:<br>
+from: <a sl-processed="1" href="http://www.coderanch.com/t/134383/Security/keyStore-vs-trustStore" rel="nofollow">http://www.coderanch.com/t/134383/Security/keyStore-vs-trustStore</a></p>
+<p>[i]Basically they can be a single store or separate.<br>
+ You will store in Keystore normally your private stuff and have a different store of trusted entries.<br>
+ The separation is good idea.<br>
+ The keystore will be used for encrypting/signing some thing with your 
+private key while the trust stores will be used mostly to authenticate 
+remote servers etc.<br>
+ In java I think to trust any entries you will pass -trustcacerts option.[/i]<br>
+[...]<br>
+[i]You always need a truststore that points to a file containing trusted
+ certificates, no matter whether you are implementing the server or the 
+client side of the protocol, with one exception. This file is often has a
+ name like cacerts, and by default it may turn out to be a file named 
+cacerts in your jre security directory. The filenames you gave are not 
+defaults, so their contents are not obvious to me.</p>
+<p> You may or may not need a keystore. The keystore points to a file 
+containing private key material. You need a keystore if 1) you are 
+implementing the server side of the protocol, or 2) you are implementing
+ the client side and you need to authenticate yourself to the server.</p>
+<p> There is one exception to everything stated. If you are using 
+certain anonymous DH ciphersuites, then neither side needs either a 
+truststore or a keystore. The connection is unauthenticated.[/i]</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=482#respond" onclick='return addComment.moveForm("comment-482", "482", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor even depth-2 highlander-comment" id="li-comment-483">
+		<div id="comment-483">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-1" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-483">June 14, 2011 at 11:25</a></div>
+
+		<div class="comment-body"><p>Thanks for clarification, this sounds 
+reasonable. When they are not separate one can’t protect them on a 
+separate level either. This mostly isn’t an issue, but I can imagine it 
+could be.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=483#respond" onclick='return addComment.moveForm("comment-483", "483", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-493">
+		<div id="comment-493">
+		<div class="comment-author vcard">
+			<img id="grav-982111e7043456188fe4f8d92bd0c9e7-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/982111e7043456188fe4f8d92bd0c9e7.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Oleg</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-493">July 19, 2011 at 16:32</a></div>
+
+		<div class="comment-body"><p>Many thanks!</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=493#respond" onclick='return addComment.moveForm("comment-493", "493", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-605">
+		<div id="comment-605">
+		<div class="comment-author vcard">
+			<img id="grav-b9e745bab94b6fb892b4affd12050c96-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/b9e745bab94b6fb892b4affd12050c96.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://tomcatnewbie.blogpost.google.com/" rel="external nofollow" class="url">tomcatNewbie</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-605">January 2, 2012 at 18:28</a></div>
+
+		<div class="comment-body"><p>Thank you very much for posting this guide. It works perfectly on Firefox, but doesn’t work in IE. Do you have any idea?</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=605#respond" onclick='return addComment.moveForm("comment-605", "605", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor odd alt depth-2 highlander-comment" id="li-comment-606">
+		<div id="comment-606">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-2" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-606">January 2, 2012 at 21:41</a></div>
+
+		<div class="comment-body"><p>If you installed client certificate 
+properly into the Windows (IE uses OS shared store, though I don’t know 
+the details), then it should be OK. I’m sure we used it with IE as 
+clients, so I’m afraid I can’t help you with this one. Guide is about 
+server side, so this seems rather like the client specific problem.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=606#respond" onclick='return addComment.moveForm("comment-606", "606", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="post pingback">
+		<p>Pingback: <a sl-processed="1" href="https://my.tritonsvc.com/web/carl.spangenberger/-/blogs/using-self-signed-certificated-for-testing-" rel="external nofollow" class="url">Welcome - Triton Services Inc</a></p>
+	</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-641">
+		<div id="comment-641">
+		<div class="comment-author vcard">
+			<img id="grav-3a80c6e803318347279ce06d7092edde-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/3a80c6e803318347279ce06d7092edde.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">zhaohua</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-641">June 22, 2012 at 21:58</a></div>
+
+		<div class="comment-body"><p>What a great post! I struggled to make it
+ work on Tomcat 7 with similar posts on Internet without any success. I 
+followed your instruction and the first try worked. Your post made my 
+day. Thank you so much!!!!</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=641#respond" onclick='return addComment.moveForm("comment-641", "641", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-643">
+		<div id="comment-643">
+		<div class="comment-author vcard">
+			<img id="grav-2b7885d9190b0cd08b59da8ef241ba9e-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/2b7885d9190b0cd08b59da8ef241ba9e.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">deep</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-643">July 6, 2012 at 2:37</a></div>
+
+		<div class="comment-body"><p>HI,</p>
+<p>Thank for your post. I was able to access the WSDL using the browser.
+ If you tell us how to access the https from client side code. What 
+needs to be imported in JVM.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=643#respond" onclick='return addComment.moveForm("comment-643", "643", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor even depth-2 highlander-comment" id="li-comment-644">
+		<div id="comment-644">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-3" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-644">July 6, 2012 at 7:32</a></div>
+
+		<div class="comment-body"><p>No experience here, client side was MS 
+based in our case and out of my scope. I’ve never done any HTTP client 
+stuff in Java actually.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=644#respond" onclick='return addComment.moveForm("comment-644", "644", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-657">
+		<div id="comment-657">
+		<div class="comment-author vcard">
+			<img id="grav-05db38038a4288a5d73c4b8797a9e965-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/05db38038a4288a5d73c4b8797a9e965.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Vijay</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-657">August 1, 2012 at 21:02</a></div>
+
+		<div class="comment-body"><p>Thanks ! Great job.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=657#respond" onclick='return addComment.moveForm("comment-657", "657", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-661">
+		<div id="comment-661">
+		<div class="comment-author vcard">
+			<img id="grav-5ce0c454c9c66c4c7774cf4b0172c5c4-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/5ce0c454c9c66c4c7774cf4b0172c5c4.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Kevin</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-661">August 10, 2012 at 14:56</a></div>
+
+		<div class="comment-body"><p>I’m running into one problem, and I think
+ that I can resolve it by importing the correct files into my 
+%JAVA_HOME%\jre\lib\security\cacerts.  My only question is, which files 
+do I use to import?  keystore.jks for the keystore?  And what for the 
+certificate file?  Thanks!</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=661#respond" onclick='return addComment.moveForm("comment-661", "661", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor odd alt depth-2 highlander-comment" id="li-comment-663">
+		<div id="comment-663">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-4" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-663">August 12, 2012 at 10:17</a></div>
+
+		<div class="comment-body"><p>I never did it this way, so I can’t help you here. Also – I’m no generic Java security expert <img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/icon_smile.gif" alt=":-)" class="wp-smiley">
+  I merely put together one specific recipe that I tried for a few 
+times. If you don’t do exactly what is in the recipe than you have to 
+study the topic further, I don’t know all the details, sorry.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=663#respond" onclick='return addComment.moveForm("comment-663", "663", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-662">
+		<div id="comment-662">
+		<div class="comment-author vcard">
+			<img id="grav-390105a4ab80cde30259b6c6bd055be4-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/390105a4ab80cde30259b6c6bd055be4.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Confused</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-662">August 12, 2012 at 2:02</a></div>
+
+		<div class="comment-body"><p>Thank you!  It has taken me nearly 2 
+weeks to get to this point and your post had the final piece to the 
+puzzle. Seeing client cert user info displayed by the server was a 
+beautiful thing.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=662#respond" onclick='return addComment.moveForm("comment-662", "662", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor odd alt depth-2 highlander-comment" id="li-comment-664">
+		<div id="comment-664">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-5" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-664">August 12, 2012 at 10:20</a></div>
+
+		<div class="comment-body"><p>I’m glad the post helped. I made it to 
+clarify it a bit to myself as well – writing the instructions and then 
+following them and proving them solid is always a good way how to learn 
+something. Not to mention than when I need it again, I know where to go.
+ <img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/icon_smile.gif" alt=":-)" class="wp-smiley">  When it helps other people too I’m really happy.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=664#respond" onclick='return addComment.moveForm("comment-664", "664", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-665">
+		<div id="comment-665">
+		<div class="comment-author vcard">
+			<img id="grav-067d926ff05c9ae8b2c34b4c9cbe5cff-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/067d926ff05c9ae8b2c34b4c9cbe5cff.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Akshay</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-665">August 17, 2012 at 6:44</a></div>
+
+		<div class="comment-body"><p>really very good one…..<br>
+its solved my problem…<br>
+Thank a lot…</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=665#respond" onclick='return addComment.moveForm("comment-665", "665", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-667">
+		<div id="comment-667">
+		<div class="comment-author vcard">
+			<img id="grav-067d926ff05c9ae8b2c34b4c9cbe5cff-1" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/067d926ff05c9ae8b2c34b4c9cbe5cff.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://gravatar.com/akshay1988in" rel="external nofollow" class="url">akshay1988in</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-667">August 21, 2012 at 16:15</a></div>
+
+		<div class="comment-body"><p>Hi I need a help from u hope u ll replay….<br>
+I done the self signed cerificate as u told.<br>
+But i need to use AEs -128 key encryption insted of RSA.<br>
+Do i get any thoughts from U…?</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=667#respond" onclick='return addComment.moveForm("comment-667", "667", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor even depth-2 highlander-comment" id="li-comment-668">
+		<div id="comment-668">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-6" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-668">August 21, 2012 at 17:02</a></div>
+
+		<div class="comment-body"><p>I can’t tell for sure, but it just boils 
+down to whether openssl can do such a certificate and Java can use that.
+ But I can’t test that really. I have no experience with AES, I don’t 
+even know whether it’s the right type of cipher for certificates, sorry.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=668#respond" onclick='return addComment.moveForm("comment-668", "668", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-720">
+		<div id="comment-720">
+		<div class="comment-author vcard">
+			<img id="grav-false-2" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Anonymous</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-720">October 18, 2012 at 16:18</a></div>
+
+		<div class="comment-body"><p>Great work! Thank you very much! Please keep this site alive!</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=720#respond" onclick='return addComment.moveForm("comment-720", "720", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-731">
+		<div id="comment-731">
+		<div class="comment-author vcard">
+			<img id="grav-4376f9e853d82b7ea3bbdbf6067289b8-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/4376f9e853d82b7ea3bbdbf6067289b8.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Patty</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-731">October 26, 2012 at 23:59</a></div>
+
+		<div class="comment-body"><p>Thank you so much!  This is such great information.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=731#respond" onclick='return addComment.moveForm("comment-731", "731", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-766">
+		<div id="comment-766">
+		<div class="comment-author vcard">
+			<img id="grav-false-3" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">sldt</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-766">December 5, 2012 at 20:13</a></div>
+
+		<div class="comment-body"><p>Best post ever about ssl client certificates.<br>
+Thanks a lot.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=766#respond" onclick='return addComment.moveForm("comment-766", "766", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-790">
+		<div id="comment-790">
+		<div class="comment-author vcard">
+			<img id="grav-3bf1253ff1f5f5da3b97ec49c657001f-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/3bf1253ff1f5f5da3b97ec49c657001f.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">herman vierendeels</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-790">February 2, 2013 at 11:49</a></div>
+
+		<div class="comment-body"><p>as said by others, great post</p>
+<p>some more things that are interessant to know</p>
+<p>force use of certificate for your application:</p>
+<p>your_webapp/WEB-INF/web.xml</p>
+<p>  CLIENT-CERT<br>
+  Website1 Application</p>
+<p> $TOMCAT_HOME/conf/tomcat-users.xml</p>
+<p>remark: username should be cert.getSubjectX500Principal().toString();</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=790#respond" onclick='return addComment.moveForm("comment-790", "790", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment odd alt depth-2 highlander-comment" id="li-comment-791">
+		<div id="comment-791">
+		<div class="comment-author vcard">
+			<img id="grav-3bf1253ff1f5f5da3b97ec49c657001f-1" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/3bf1253ff1f5f5da3b97ec49c657001f.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">herman vierendeels</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-791">February 2, 2013 at 11:56</a></div>
+
+		<div class="comment-body"><p>previous remark , xml statements got filtered away</p>
+<p>force use of certificate for your application:</p>
+<p>your_webapp/WEB-INF/web.xml<br>
+ login-config<br>
+  auth-method CLIENT-CERT</p>
+<p>$TOMCAT_HOME/conf/tomcat-users.xml<br>
+ user username=”EMAILADDRESS=x, CN=x,OU=x, O=x, L=x, ST=x, C=x” password=”" roles=”website1_role”</p>
+<p>remark: username should be cert.getSubjectX500Principal().toString();</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=791#respond" onclick='return addComment.moveForm("comment-791", "791", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	<ul class="children">
+		<li class="comment byuser comment-author-virgo47 bypostauthor even depth-3 highlander-comment" id="li-comment-792">
+		<div id="comment-792">
+		<div class="comment-author vcard">
+			<img id="grav-af081c81efc82a005def915cde584475-7" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475_002.jpeg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://virgo47.wordpress.com/about/" rel="external nofollow" class="url">virgo47</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-792">February 2, 2013 at 20:51</a></div>
+
+		<div class="comment-body"><p>Check this <a sl-processed="1" href="http://wordpress.org/extend/plugins/source-codes-in-comments/" rel="nofollow">http://wordpress.org/extend/plugins/source-codes-in-comments/</a></p>
+<div><div id="highlighter_585700" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">&lt;testing&gt;whatever&lt;/testing&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+
+		<div class="reply">
+					</div>
+	</div>
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-910">
+		<div id="comment-910">
+		<div class="comment-author vcard">
+			<img id="grav-false-4" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Anonymous</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-910">April 25, 2013 at 15:31</a></div>
+
+		<div class="comment-body"><p>Invaluable.  You are a good citizen for posting all of this.</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=910#respond" onclick='return addComment.moveForm("comment-910", "910", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-961">
+		<div id="comment-961">
+		<div class="comment-author vcard">
+			<img id="grav-7ea464bb5c391e6966014e468251badf-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/7ea464bb5c391e6966014e468251badf.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn"><a sl-processed="1" href="http://java-with-shiva.blogspot.in/" rel="external nofollow" class="url">Shibaram</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-961">June 13, 2013 at 11:44</a></div>
+
+		<div class="comment-body"><p>Hi,<br>
+         Thank you for this much informative post.<br>
+          Your post is very much helpful. I did achieve all the steps 
+successfully and my ssl configuration seems to be working as desired 
+till the last step you have mentioned above.<br>
+But I am trying to implement CAS for SSO functionality which is requiring this SSL configuration.</p>
+<p>I am getting below error (In all cases like either when my client 
+application is on another machine like in a tomcat on windows  or on the
+ same tomcat in linux env where my ssl is configured) :</p>
+<p>HTTP Status 500 – javax.net.ssl.SSLHandshakeException: 
+sun.security.validator.ValidatorException: PKIX path building failed: 
+sun.security.provider.certpath.SunCertPathBuilderException: unable to 
+find valid certification path to requested target</p>
+<p>java.lang.RuntimeException: javax.net.ssl.SSLHandshakeException: 
+sun.security.validator.ValidatorException: PKIX path building failed: 
+sun.security.provider.certpath.SunCertPathBuilderException: unable to 
+find valid certification path to requested target<br>
+org.jasig.cas.client.util.CommonUtils.getResponseFromServer(CommonUtils.java:341)<br>
+	org.jasig.cas.client.util.CommonUtils.getResponseFromServer(CommonUtils.java:305)</p>
+<p>Any help please ??</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=961#respond" onclick='return addComment.moveForm("comment-961", "961", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-975">
+		<div id="comment-975">
+		<div class="comment-author vcard">
+			<img id="grav-false-5" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">			<cite class="fn">Anonymous</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#comment-975">July 1, 2013 at 10:38</a></div>
+
+		<div class="comment-body"><p>You are doing God’s work man. Keep it up!</p>
+</div>
+
+		<div class="reply">
+			<a sl-processed="1" class="comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/?replytocom=975#respond" onclick='return addComment.moveForm("comment-975", "975", "respond", "459")'>Reply</a>		</div>
+	</div>
+
+	</li><!-- #comment-## -->
+	</ol>
+
+
+								<div id="respond" class="comment-respond js">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a sl-processed="1" rel="nofollow" id="cancel-comment-reply-link" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://virgo47.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																										
+
+
+												<input id="highlander_comment_nonce" name="highlander_comment_nonce" value="3171f270da" type="hidden"><input name="_wp_http_referer" value="/2010/08/23/tomcat-web-application-with-ssl-client-certificates/" type="hidden">
+<input name="hc_post_as" id="hc_post_as" value="guest" type="hidden">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea aria-hidden="true" tabindex="-1" style="height: 36px; resize: none; overflow-y: hidden; transition: none 0s ease 0s ; position: absolute; top: 0px; left: -9999px; width: 608px; line-height: 16px; text-decoration: none; letter-spacing: 0px;" placeholder="Enter your comment here..." title="Enter your comment here..."></textarea><textarea style="height: 36px; resize: none; overflow-y: hidden; transition: none 0s ease 0s ;" placeholder="Enter your comment here..." id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div style="display: none;" id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a sl-processed="1" href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a sl-processed="1" href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a sl-processed="1" href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a sl-processed="1" href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a.html" allowtransparency="true" seamless="seamless" frameborder="0" height="24" scrolling="no" width="24"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a sl-processed="1" href="https://gravatar.com/site/signup/" target="_blank">				<img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name</label>
+					<div class="comment-form-input"><input id="author" name="author" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text"></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/wplogo.png" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" type="hidden">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'wordpress'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" type="hidden">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'twitter'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" type="hidden">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'facebook'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Google+ photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" type="hidden">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'googleplus'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a sl-processed="1" href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+	
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div style="display: none;" id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of follow-up comments via email.</label></p></div>
+
+												<p style="display: none;" class="form-submit">
+							<input name="submit" id="comment-submit" value="Post Comment" type="submit">
+							<input name="comment_post_ID" value="459" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+						
+<input name="genseq" value="1392376145" type="hidden">
+<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="a4bc827bb3" type="hidden"></p><script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/form.js"></script>
+<p style="display: none;"><input id="ak_js" name="ak_js" value="1392376155362" type="hidden"></p>					</form>
+							</div><!-- #respond -->
+			<div style="clear: both"></div>
+</div><!-- #comments -->
+	</div>
+
+<div id="sidebar">
+
+			<div id="recent-posts-2" class="widget widget_recent_entries">		<h4>Recent Posts</h4>		<ul>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2013/07/07/witcher-2-bittersweet-review/">Witcher 2 bittersweet&nbsp;review</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2013/05/05/git-bash-here-in-console2-in-total-commander-with-keyboard-shortcut-hotkey/">Git Bash Here in Console2 in Total Commander with keyboard shortcut&nbsp;(hotkey)?</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2013/04/16/zse-ponuka-e-zlava/">ZSE Ponuka&nbsp;E.Zľava?</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2013/01/02/happy-new-year-2013/">Happy New Year&nbsp;2013!</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2012/10/20/my-last-two-years-with-technology/">My last two years with&nbsp;technology</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2012/06/22/changing-system-time-in-java/">Changing system time in&nbsp;Java</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2012/05/01/live-architecture-with-java-spring-jpa-and-osiv/">Live architecture with Java, Spring, JPA and&nbsp;OSIV</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2012/03/03/dorling-kindersley-vs-ikar-preklad/">Dorling Kindersley vs IKAR&nbsp;preklad</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2012/03/01/stargate-ds9-and-other-heroes/">Stargate, DS9 and other&nbsp;Heroes</a>
+						</li>
+					<li>
+				<a sl-processed="1" href="http://virgo47.wordpress.com/2012/02/12/three-years-with-java-simon-4/">Three years with Java Simon&nbsp;(4)</a>
+						</li>
+				</ul>
+		</div><div id="archives-2" class="widget widget_archive"><h4>Archives</h4>		<select name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;"> <option selected="selected" value="">Select Month</option> 	<option value="http://virgo47.wordpress.com/2013/07/"> July 2013 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2013/05/"> May 2013 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2013/04/"> April 2013 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2013/01/"> January 2013 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2012/10/"> October 2012 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2012/06/"> June 2012 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2012/05/"> May 2012 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2012/03/"> March 2012 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2012/02/"> February 2012 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2012/01/"> January 2012 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2011/12/"> December 2011 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2011/11/"> November 2011 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2011/10/"> October 2011 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2011/09/"> September 2011 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2011/07/"> July 2011 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2011/06/"> June 2011 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2011/05/"> May 2011 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2011/04/"> April 2011 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2011/03/"> March 2011 &nbsp;(5)</option>
+	<option value="http://virgo47.wordpress.com/2011/02/"> February 2011 &nbsp;(4)</option>
+	<option value="http://virgo47.wordpress.com/2011/01/"> January 2011 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2010/12/"> December 2010 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2010/08/"> August 2010 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2010/07/"> July 2010 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2010/05/"> May 2010 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2010/02/"> February 2010 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2010/01/"> January 2010 &nbsp;(4)</option>
+	<option value="http://virgo47.wordpress.com/2009/12/"> December 2009 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2009/11/"> November 2009 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2009/10/"> October 2009 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2009/09/"> September 2009 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2009/08/"> August 2009 &nbsp;(5)</option>
+	<option value="http://virgo47.wordpress.com/2009/07/"> July 2009 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2009/06/"> June 2009 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2009/05/"> May 2009 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2009/04/"> April 2009 &nbsp;(4)</option>
+	<option value="http://virgo47.wordpress.com/2009/03/"> March 2009 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2009/02/"> February 2009 &nbsp;(8)</option>
+	<option value="http://virgo47.wordpress.com/2009/01/"> January 2009 &nbsp;(7)</option>
+	<option value="http://virgo47.wordpress.com/2008/12/"> December 2008 &nbsp;(10)</option>
+	<option value="http://virgo47.wordpress.com/2008/11/"> November 2008 &nbsp;(5)</option>
+	<option value="http://virgo47.wordpress.com/2008/10/"> October 2008 &nbsp;(8)</option>
+	<option value="http://virgo47.wordpress.com/2008/09/"> September 2008 &nbsp;(6)</option>
+	<option value="http://virgo47.wordpress.com/2008/08/"> August 2008 &nbsp;(4)</option>
+	<option value="http://virgo47.wordpress.com/2008/07/"> July 2008 &nbsp;(3)</option>
+	<option value="http://virgo47.wordpress.com/2008/06/"> June 2008 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2008/05/"> May 2008 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2008/04/"> April 2008 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2008/03/"> March 2008 &nbsp;(5)</option>
+	<option value="http://virgo47.wordpress.com/2008/02/"> February 2008 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2007/12/"> December 2007 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2007/11/"> November 2007 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2007/05/"> May 2007 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2007/04/"> April 2007 &nbsp;(2)</option>
+	<option value="http://virgo47.wordpress.com/2007/03/"> March 2007 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2007/02/"> February 2007 &nbsp;(1)</option>
+	<option value="http://virgo47.wordpress.com/2006/12/"> December 2006 &nbsp;(4)</option>
+	<option value="http://virgo47.wordpress.com/2006/11/"> November 2006 &nbsp;(4)</option>
+	<option value="http://virgo47.wordpress.com/2006/10/"> October 2006 &nbsp;(5)</option>
+ </select>
+</div><div id="recent-comments-2" class="widget widget_recent_comments"><h4>Recent Comments</h4>				<table class="recentcommentsavatar" border="0" cellpadding="0" cellspacing="0">
+					<tbody><tr><td title="Richard “Virgo” Richter" class="recentcommentsavatartop" style="height:32px; width:32px;"><a sl-processed="1" href="https://plus.google.com/+RichardRichter" rel="nofollow"><img id="grav-af081c81efc82a005def915cde584475-8" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/af081c81efc82a005def915cde584475.jpeg" class="avatar avatar-32 grav-hashed" height="32" width="32"></a></td><td class="recentcommentstexttop" style=""><a sl-processed="1" href="https://plus.google.com/+RichardRichter" rel="nofollow">Richard “Virgo” Rich…</a> on <a sl-processed="1" href="http://virgo47.wordpress.com/2011/03/24/from-intellij-idea-to-eclipse-3/#comment-1144">From IntelliJ IDEA to Eclipse…</a></td></tr><tr><td title="Common Developer" class="recentcommentsavatarend" style="height:32px; width:32px;"><img id="grav-7e06ee97b00ebb8fb5628b460b4e2a3e-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/7e06ee97b00ebb8fb5628b460b4e2a3e.png" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32"></td><td class="recentcommentstextend" style="">Common Developer on <a sl-processed="1" href="http://virgo47.wordpress.com/2011/03/24/from-intellij-idea-to-eclipse-3/#comment-1143">From IntelliJ IDEA to Eclipse…</a></td></tr><tr><td title="Richard “Virgo” Richter" class="recentcommentsavatarend" style="height:32px; width:32px;"><a sl-processed="1" href="https://plus.google.com/+RichardRichter" rel="nofollow"><img alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/photo.jpg" class="avatar avatar-32" height="32" width="32"></a></td><td class="recentcommentstextend" style=""><a sl-processed="1" href="https://plus.google.com/+RichardRichter" rel="nofollow">Richard “Virgo” Rich…</a> on <a sl-processed="1" href="http://virgo47.wordpress.com/2008/07/04/on-line-sa-uz-nehram-lebo-radiolan/#comment-1104">On-line sa už nehrám, lebo…</a></td></tr><tr><td title="MartinH" class="recentcommentsavatarend" style="height:32px; width:32px;"><img id="grav-5ed365a369946ce1b4437db0cbb6fbff-0" alt="" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/5ed365a369946ce1b4437db0cbb6fbff.png" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32"></td><td class="recentcommentstextend" style="">MartinH on <a sl-processed="1" href="http://virgo47.wordpress.com/2008/07/04/on-line-sa-uz-nehram-lebo-radiolan/#comment-1103">On-line sa už nehrám, lebo…</a></td></tr><tr><td title="How To Git Enable Your Console Using GitHub for Windows » Original Mind Pty Ltd" class="recentcommentsavatarend" style="height:32px; width:32px;"><a sl-processed="1" href="http://originalmind.com.au/git-enable-powershell-console-using-github-windows/" rel="nofollow"></a></td><td class="recentcommentstextend" style=""><a sl-processed="1" href="http://originalmind.com.au/git-enable-powershell-console-using-github-windows/" rel="nofollow">How To Git Enable Yo…</a> on <a sl-processed="1" href="http://virgo47.wordpress.com/2013/05/05/git-bash-here-in-console2-in-total-commander-with-keyboard-shortcut-hotkey/#comment-1086">Git Bash Here in Console2 in T…</a></td></tr>				</tbody></table>
+				</div><div id="rss-2" class="widget widget_rss"><h4><a sl-processed="1" class="rsswidget" href="http://gplusrss.com/rss/feed/38b262cb82e579c79368fd4c4d410b8f500ae7f45cf5b" title="Syndicate this content"><img style="background: orange; color: white; border: none;" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/rss.png" alt="RSS" height="14" width="14"></a> <a sl-processed="1" class="rsswidget" href="https://plus.google.com/115010018366713241013" title="Still naive...">My Google Plus feed</a></h4><ul><li><a sl-processed="1" class="rsswidget" href="https://plus.google.com/115010018366713241013/posts/Ki9oDtXYohM" title="">Yes, yes, yes... after a couple of years, Alt+F7 searches as it should again in IntelliJ IDEA. http:...</a><div class="rssSummary">Yes,
+ yes, yes... after a couple of years, Alt+F7 searches as it should again
+ in IntelliJ IDEA. http://youtrack.jetbrains.com/issue/IDEA-97930Upgrade
+ to 13.0.2 mandatory. :-) This made my day for sure. Too bad it's 
+evening already!﻿</div></li><li><a sl-processed="1" class="rsswidget" href="https://plus.google.com/115010018366713241013/posts/JqCMUoSBQKH" title="">http://komentare.sme.sk/c/7084387/cynicka-obluda-este-lepsia-policia.html
+No bolo by na čase. :-)﻿</a><div class="rssSummary">http://komentare.sme.sk/c/7084387/cynicka-obluda-este-lepsia-policia.htmlNo
+ bolo by na čase. :-)﻿ 										Kaliňák možno pochopil princíp 
+policajnej práce. Lacné vtipy na úrovni ich autora. 									</div></li><li><a sl-processed="1" class="rsswidget" href="https://plus.google.com/115010018366713241013/posts/eRTsmrtD7fu" title="">Simply beautiful... and more actually. I also like the notion of doing things because it's fun. :-) ...</a><div class="rssSummary">Simply
+ beautiful... and more actually. I also like the notion of doing things 
+because it's fun. :-) Not the first time I've heard this as maybe the 
+best motivation.﻿ 										Between the Folds Origami full documentary 	
+								</div></li><li><a sl-processed="1" class="rsswidget" href="https://plus.google.com/115010018366713241013/posts/crj7e1ohgu6" title="">With new Nexus 7, browsing Google Play and trying apps, I miss good old days when Free meant really ...</a><div class="rssSummary">With
+ new Nexus 7, browsing Google Play and trying apps, I miss good old days
+ when Free meant really free. Trial-ware should be obvious before I 
+install it, Free is rather misleading.﻿</div></li><li><a sl-processed="1" class="rsswidget" href="https://plus.google.com/115010018366713241013/posts/7Wjb5Zowfub" title="">To nevadí, že majú komunistické maniere. Určite sú z kresťanských rodín a väčšina z nich predsa nemala...</a><div class="rssSummary">To
+ nevadí, že majú komunistické maniere. Určite sú z kresťanských rodín a 
+väčšina z nich predsa nemala problém cestovať ani pred 89. Banda jedna. 
+Ale čo už, keď máme na Slovensku také % Kolesíkov ako aj v parlamente, 
+že áno...﻿ Novinári nebudú môcť fotografovať, čo majú poslanci na 
+stoloch. Výrazne im obmedzia aj pohyb po budove. […]</div></li></ul></div><div id="categories-1" class="widget widget_categories"><h4>Categories</h4><select name="cat" id="cat" class="postform">
+	<option selected="selected" value="-1">Select Category</option>
+	<option class="level-0" value="1747">fiction&nbsp;&nbsp;(37)</option>
+	<option class="level-0" value="21">games&nbsp;&nbsp;(29)</option>
+	<option class="level-0" value="1017">java&nbsp;&nbsp;(36)</option>
+	<option class="level-0" value="18">music&nbsp;&nbsp;(14)</option>
+	<option class="level-0" value="6870">real-life&nbsp;&nbsp;(36)</option>
+	<option class="level-0" value="581">software&nbsp;&nbsp;(71)</option>
+	<option class="level-0" value="412">video&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="115184">virtual-life&nbsp;&nbsp;(53)</option>
+</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+	var dropdown = document.getElementById("cat");
+	function onCatChange() {
+		if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
+			location.href = "http://virgo47.wordpress.com/?cat="+dropdown.options[dropdown.selectedIndex].value;
+		}
+	}
+	dropdown.onchange = onCatChange;
+/* ]]> */
+</script>
+
+</div><div id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h4></h4><div style="overflow:hidden"><a sl-processed="1" href="http://virgo47.wordpress.com/tag/24/" class="tag-link-23586" title="3 topics" style="font-size: 9.953488372093pt;">24</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/audio/" class="tag-link-413" title="3 topics" style="font-size: 9.953488372093pt;">audio</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/blog/" class="tag-link-273" title="2 topics" style="font-size: 8pt;">blog</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/blogger/" class="tag-link-481" title="2 topics" style="font-size: 8pt;">blogger</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/bratislava/" class="tag-link-117776" title="2 topics" style="font-size: 8pt;">Bratislava</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/bug/" class="tag-link-1621" title="2 topics" style="font-size: 8pt;">bug</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/canon/" class="tag-link-16479" title="2 topics" style="font-size: 8pt;">canon</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/cesta/" class="tag-link-1530511" title="21 topics" style="font-size: 22pt;">cesta</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/comparison/" class="tag-link-34455" title="5 topics" style="font-size: 12.883720930233pt;">comparison</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/daw/" class="tag-link-1235188" title="3 topics" style="font-size: 9.953488372093pt;">daw</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/download/" class="tag-link-4230" title="3 topics" style="font-size: 9.953488372093pt;">download</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/eclipse/" class="tag-link-18466" title="8 topics" style="font-size: 15.651162790698pt;">eclipse</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/epic/" class="tag-link-2223" title="2 topics" style="font-size: 8pt;">epic</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/f2p/" class="tag-link-1392858" title="4 topics" style="font-size: 11.581395348837pt;">f2p</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/fb19/" class="tag-link-15582045" title="3 topics" style="font-size: 9.953488372093pt;">fb19</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/firefox-2/" class="tag-link-338524" title="2 topics" style="font-size: 8pt;">firefox 2</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/firefox-3/" class="tag-link-718811" title="2 topics" style="font-size: 8pt;">firefox 3</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/forums/" class="tag-link-117" title="2 topics" style="font-size: 8pt;">forums</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/fps/" class="tag-link-39008" title="2 topics" style="font-size: 8pt;">fps</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/free-to-play/" class="tag-link-229125" title="3 topics" style="font-size: 9.953488372093pt;">free-to-play</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/free-game/" class="tag-link-413296" title="2 topics" style="font-size: 8pt;">free game</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/freeware/" class="tag-link-807" title="3 topics" style="font-size: 9.953488372093pt;">freeware</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/galeon/" class="tag-link-2507858" title="2 topics" style="font-size: 8pt;">galeon</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/gmail/" class="tag-link-1110" title="3 topics" style="font-size: 9.953488372093pt;">gmail</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/google/" class="tag-link-81" title="7 topics" style="font-size: 14.837209302326pt;">google</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/google-calendar/" class="tag-link-134522" title="2 topics" style="font-size: 8pt;">google calendar</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/google-chrome/" class="tag-link-10625068" title="2 topics" style="font-size: 8pt;">google chrome</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/google-docs/" class="tag-link-560559" title="3 topics" style="font-size: 9.953488372093pt;">google docs</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/google-web-toolkit/" class="tag-link-204985" title="3 topics" style="font-size: 9.953488372093pt;">google web toolkit</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/gwt/" class="tag-link-173823" title="4 topics" style="font-size: 11.581395348837pt;">gwt</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/hibernate/" class="tag-link-17907" title="2 topics" style="font-size: 8pt;">hibernate</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/home-recording/" class="tag-link-241463" title="6 topics" style="font-size: 14.023255813953pt;">home recording</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/ide/" class="tag-link-7746" title="4 topics" style="font-size: 11.581395348837pt;">ide</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/idea/" class="tag-link-2933" title="8 topics" style="font-size: 15.651162790698pt;">idea</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/imdb/" class="tag-link-116558" title="2 topics" style="font-size: 8pt;">imdb</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/intellij/" class="tag-link-114384" title="8 topics" style="font-size: 15.651162790698pt;">intellij</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/jack-bauer/" class="tag-link-50072" title="2 topics" style="font-size: 8pt;">jack bauer</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/java/" class="tag-link-1017" title="13 topics" style="font-size: 18.906976744186pt;">java</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/javasimon/" class="tag-link-14699961" title="5 topics" style="font-size: 12.883720930233pt;">javasimon</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/java-simon/" class="tag-link-68158258" title="5 topics" style="font-size: 12.883720930233pt;">java simon</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/jdbc/" class="tag-link-12920" title="3 topics" style="font-size: 9.953488372093pt;">jdbc</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/jmx/" class="tag-link-373297" title="3 topics" style="font-size: 9.953488372093pt;">jmx</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/jpa/" class="tag-link-307053" title="2 topics" style="font-size: 8pt;">jpa</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/mass-effect/" class="tag-link-737602" title="2 topics" style="font-size: 8pt;">Mass Effect</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/maven/" class="tag-link-47862" title="3 topics" style="font-size: 9.953488372093pt;">maven</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/midi/" class="tag-link-62912" title="3 topics" style="font-size: 9.953488372093pt;">midi</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/mmorpg/" class="tag-link-1224" title="6 topics" style="font-size: 14.023255813953pt;">mmorpg</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/mold/" class="tag-link-118930" title="3 topics" style="font-size: 9.953488372093pt;">mold</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/monitoring/" class="tag-link-111949" title="3 topics" style="font-size: 9.953488372093pt;">monitoring</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/music/" class="tag-link-18" title="4 topics" style="font-size: 11.581395348837pt;">music</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/perfect-world/" class="tag-link-850841" title="10 topics" style="font-size: 17.116279069767pt;">perfect world</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/performance/" class="tag-link-1930" title="2 topics" style="font-size: 8pt;">performance</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/prison-break/" class="tag-link-8192" title="2 topics" style="font-size: 8pt;">prison break</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/problem/" class="tag-link-31413" title="6 topics" style="font-size: 14.023255813953pt;">problem</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/pwi/" class="tag-link-1548039" title="9 topics" style="font-size: 16.46511627907pt;">pwi</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/quest/" class="tag-link-85590" title="5 topics" style="font-size: 12.883720930233pt;">quest</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/radiolan/" class="tag-link-13790263" title="2 topics" style="font-size: 8pt;">radiolan</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/reaper/" class="tag-link-288284" title="5 topics" style="font-size: 12.883720930233pt;">reaper</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/review/" class="tag-link-1745" title="16 topics" style="font-size: 20.209302325581pt;">review</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/seam/" class="tag-link-257664" title="3 topics" style="font-size: 9.953488372093pt;">seam</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/software/" class="tag-link-581" title="2 topics" style="font-size: 8pt;">software</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/spring/" class="tag-link-9486" title="3 topics" style="font-size: 9.953488372093pt;">spring</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/steam/" class="tag-link-12273" title="11 topics" style="font-size: 17.767441860465pt;">Steam</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/svn/" class="tag-link-164684" title="3 topics" style="font-size: 9.953488372093pt;">svn</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/travian/" class="tag-link-127686" title="3 topics" style="font-size: 9.953488372093pt;">travian</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/ubuntu/" class="tag-link-255" title="3 topics" style="font-size: 9.953488372093pt;">ubuntu</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/uml/" class="tag-link-3616" title="3 topics" style="font-size: 9.953488372093pt;">uml</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/unreal-tournament-3/" class="tag-link-671007" title="2 topics" style="font-size: 8pt;">unreal tournament 3</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/update/" class="tag-link-3251" title="2 topics" style="font-size: 8pt;">update</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/ut3/" class="tag-link-987313" title="3 topics" style="font-size: 9.953488372093pt;">ut3</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/utopia/" class="tag-link-42896" title="16 topics" style="font-size: 20.209302325581pt;">utopia</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/vst/" class="tag-link-62279" title="3 topics" style="font-size: 9.953488372093pt;">vst</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/wifi/" class="tag-link-4305" title="2 topics" style="font-size: 8pt;">wifi</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/wordpress/" class="tag-link-33" title="2 topics" style="font-size: 8pt;">wordpress</a>
+<a sl-processed="1" href="http://virgo47.wordpress.com/tag/youtube/" class="tag-link-6567" title="3 topics" style="font-size: 9.953488372093pt;">youtube</a></div></div><div id="blog-stats-2" class="widget widget_blog-stats"><h4>Blog Stats</h4>		<ul>
+			<li>123,256 hits</li>
+		</ul>
+		</div><div id="top-posts-3" class="widget widget_top-posts"><h4>Top Posts &amp; Pages</h4><ul><li><a sl-processed="1" href="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/" class="bump-view" data-bump-view="tp">Tomcat web application with SSL client certificates</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2008/06/13/jpa-postgresql-and-bytea-vs-oid-type/" class="bump-view" data-bump-view="tp">JPA, PostgreSQL and bytea vs. oid type</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2012/06/22/changing-system-time-in-java/" class="bump-view" data-bump-view="tp">Changing system time in Java</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2011/02/22/from-intellij-idea-to-eclipse-2/" class="bump-view" data-bump-view="tp">From IntelliJ IDEA to Eclipse (2)</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2011/01/30/eclipse-vs-intellij-idea/" class="bump-view" data-bump-view="tp">Eclipse vs IntelliJ IDEA</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2011/03/07/honestly-i-hate-maven/" class="bump-view" data-bump-view="tp">Honestly... I hate Maven</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2011/12/05/three-years-with-java-simon-2/" class="bump-view" data-bump-view="tp">Three years with Java Simon (2)</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2008/10/09/jms-time-to-live-and-websphere-mq/" class="bump-view" data-bump-view="tp">JMS, time-to-live and Websphere MQ</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2011/02/20/starting-with-wicket-on-intellij-idea/" class="bump-view" data-bump-view="tp">Starting with Wicket on IntelliJ IDEA</a></li>
+<li><a sl-processed="1" href="http://virgo47.wordpress.com/2010/01/17/gwt-tree-and-smartgwt-troubles/" class="bump-view" data-bump-view="tp">GWT Tree and SmartGWT troubles</a></li>
+</ul></div><div id="text-126431431" class="widget widget_text">			<div class="textwidget"><p align="right">
+<a sl-processed="1" href="http://stackoverflow.com/users/658826/virgo47">
+<img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/658826.png" alt="profile for virgo47 at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for virgo47 at Stack Overflow, Q&amp;A for professional and enthusiast programmers" height="58" width="208">
+</a>
+</p>
+
+<p align="right">
+<a sl-processed="1" href="http://wikimediafoundation.org/wiki/Support_Wikipedia/en"><img alt="Wikipedia Affiliate Button" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/Banner_125x125_0001_B.jpg" border="0"></a>
+</p>
+
+<p align="right">
+<a sl-processed="1" href="http://www.jetbrains.com/idea/" style="position:relative;display:block;width:127px;height:37px;border:0;text-decoration:none;text-indent:0;margin:0;padding:0;"><span style="position:absolute;top:0;left:33px;font-size:10px;cursor:pointer;background-image:none;border:0;color:#acc4f9;font-family:trebuchet ms,arial,sans-serif;font-weight:normal;text-align:left;margin:0;padding:0;">Addicted to</span><img src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/idea125x37_blue.gif" alt="The best Java IDE"></a>
+</p></div>
+		</div><div id="meta-2" class="widget widget_meta"><h4>Meta</h4>			<ul>
+			<li><a sl-processed="1" href="http://wordpress.com/signup/?ref=wplogin">Register</a></li>			<li><a sl-processed="1" href="http://virgo47.wordpress.com/wp-login.php">Log in</a></li>
+			<li><a sl-processed="1" href="http://virgo47.wordpress.com/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a sl-processed="1" href="http://virgo47.wordpress.com/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a sl-processed="1" href="http://wordpress.com/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.com</a></li>						</ul>
+</div>
+</div>
+</div>
+
+
+<div id="footer">
+	<div class="footerleft">
+		<p><a sl-processed="1" href="http://wordpress.com/?ref=footer" rel="generator">Blog at WordPress.com</a>.</p>
+    </div>
+    <div class="footerright">
+	    <a sl-processed="1" href="http://theme.wordpress.com/themes/enterprise/" title="Learn more about this theme">The Enterprise Theme</a>.     </div>
+</div>
+
+</div>
+
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-af081c81efc82a005def915cde584475">
+	</div>
+	<div class="grofile-hash-map-d41d8cd98f00b204e9800998ecf8427e">
+	</div>
+	<div class="grofile-hash-map-6a0ae53a44d225df2df74d88fceae9bd">
+	</div>
+	<div class="grofile-hash-map-cc2c403e35d3238011a65769ad4f2ba4">
+	</div>
+	<div class="grofile-hash-map-9991513a5a87be6f7b41f7dd10a6d1c6">
+	</div>
+	<div class="grofile-hash-map-662266d5c35ced0b5356ad7d458c4651">
+	</div>
+	<div class="grofile-hash-map-af081c81efc82a005def915cde584475">
+	</div>
+	<div class="grofile-hash-map-982111e7043456188fe4f8d92bd0c9e7">
+	</div>
+	<div class="grofile-hash-map-b9e745bab94b6fb892b4affd12050c96">
+	</div>
+	<div class="grofile-hash-map-3a80c6e803318347279ce06d7092edde">
+	</div>
+	<div class="grofile-hash-map-2b7885d9190b0cd08b59da8ef241ba9e">
+	</div>
+	<div class="grofile-hash-map-05db38038a4288a5d73c4b8797a9e965">
+	</div>
+	<div class="grofile-hash-map-5ce0c454c9c66c4c7774cf4b0172c5c4">
+	</div>
+	<div class="grofile-hash-map-390105a4ab80cde30259b6c6bd055be4">
+	</div>
+	<div class="grofile-hash-map-067d926ff05c9ae8b2c34b4c9cbe5cff">
+	</div>
+	<div class="grofile-hash-map-4376f9e853d82b7ea3bbdbf6067289b8">
+	</div>
+	<div class="grofile-hash-map-3bf1253ff1f5f5da3b97ec49c657001f">
+	</div>
+	<div class="grofile-hash-map-7ea464bb5c391e6966014e468251badf">
+	</div>
+	<div class="grofile-hash-map-7e06ee97b00ebb8fb5628b460b4e2a3e">
+	</div>
+	<div class="grofile-hash-map-5ed365a369946ce1b4437db0cbb6fbff">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"http:\/\/virgo47.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"http:\/\/virgo47.wordpress.com\/wp-login.php?action=logout&_wpnonce=14e2b9a9ea","homeURL":"http:\/\/virgo47.wordpress.com\/","postID":"459","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a_004.js"></script>
+
+	<div style="bottom: -269px;" id="bit" class="loggedout-follow-normal">
+		<a sl-processed="1" class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “Virgo's Naive Stories”</label></h3>
+
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 218 other followers</p>
+			<p><input name="email" value="Enter your email address" onfocus='this.value=(this.value=="Enter your email address") ? "" : this.value;' onblur='this.value=(this.value=="") ? "Enter email address" : this.value;' id="loggedout-follow-field" type="email"></p>
+
+			<input name="action" value="subscribe" type="hidden">
+			<input name="blog_id" value="2988789" type="hidden">
+			<input name="source" value="http://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/" type="hidden">
+			<input name="sub-type" value="loggedout-follow" type="hidden">
+
+			<input id="_wpnonce" name="_wpnonce" value="cb3679be5f" type="hidden"><input name="_wp_http_referer" value="/2010/08/23/tomcat-web-application-with-ssl-client-certificates/" type="hidden">
+			<p id="bsub-subscribe-button"><input value="Sign me up" type="submit"></p>
+			</form>
+					<div id="bsub-credit"><a sl-processed="1" href="http://wordpress.com/signup/?ref=lof">Powered by WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "virgo47.wordpress.com";
+	</script>
+	<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/725X1342.js"></script>
+	<script type="text/javascript">
+		WPCOM_sharing_counts = {"http:\/\/virgo47.wordpress.com\/2010\/08\/23\/tomcat-web-application-with-ssl-client-certificates\/":459}	</script>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+							<script type="text/javascript">
+			jQuery(document).on('ready', function(){
+				jQuery('body').on('click', 'a.share-pinterest', function(e){
+					e.preventDefault();
+
+					// Load Pinterest Bookmarklet code
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = window.location.protocol + "//assets.pinterest.com/js/pinmarklet.js?r=" + ( Math.random() * 99999999 );
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+
+					// Trigger Stats
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = this + ( this.toString().indexOf( '?' ) ? '&' : '?' ) + 'js_only=1';
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+				});
+			});
+			</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-tumblr' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+		});
+		</script>
+			<div id="sharing_email" style="display: none;">
+		<form action="/2010/08/23/tomcat-web-application-with-ssl-client-certificates/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input name="target_email" id="target_email" type="email">
+
+			
+				<label for="source_name">Your Name</label>
+				<input name="source_name" id="source_name" type="text">
+
+				<label for="source_email">Your Email Address</label>
+				<input name="source_email" id="source_email" type="email">
+
+			
+			<div class="recaptcha" id="sharing_recaptcha"></div><input name="recaptcha_public_key" id="recaptcha_public_key" value="6LcYW8MSAAAAADBAuEH9yaPcF7lWh11Iq62ZKtoo" type="hidden">
+			<img style="float: right; display: none" class="loading" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/loading.gif" alt="loading" height="16" width="16">
+			<input value="Send Email" class="sharing_send" type="submit">
+			<a sl-processed="1" href="#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a_002.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?m=1370811927g&amp;ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414g&amp;ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var recaptcha_options = {"lang":"en"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/a_003.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><script src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/w.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({'blog':'2988789','v':'wpcom','tz':'1','user_id':'0','post':'459','subd':'virgo47'});
+ex_go({'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRW3J8TyVnZTFjeVZ1X00sVXRaSkQ5N2xNcCt4S29GW1RfOCtUV3pmW0Z+V2xUNGswdjVkJVRfXVZuRTBpM002ZnloVEI0ZTNCZm93alY/eWpEMnBkQyt8Y2c4cmMzSkNHci1jcmtvckJTdDQ/dWpxLV02UCVMfnhuQkNpdXNQSzUwMFktTjFSd1BRSlNPLGgvRiwmTl9iTldfbmwuUisrREFGNFBtRHI0dzFQM2M4dFNmZj98X1Y9TjFZbk1IJlRPXzA3fExLYl9mWz09TnlbZEZQfFhneTFUZVh6Y2lIZzBPLTd3Tk9JMzRRMkdYbVhiaU1fbkJGOHdJUTElaX5nfi9YMU9VLnomOUlmajYxMHhURmdEOA=='});
+addLoadEvent(function(){linktracker_init('2988789',459);});
+	</script><img id="wpstats" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/g.gif" alt=""><img id="wpstats2" src="Tomcat%20web%20application%20with%20SSL%20client%20certificates%20%7C%20Virgo%27s%20Naive%20Stories_files/g_002.gif" alt="" style="display:none">
+<noscript><img src="http://stats.wordpress.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//stats.wordpress.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<iframe style="display: none; width: 0px; height: 0px;" name="google_osd_static_frame" id="google_osd_static_frame_2263292431698"></iframe><a style="position: absolute; top: 711.5px; left: 1142px; z-index: 15; border: medium none; text-decoration: none;" sl-processed="1" href="https://plus.google.com/+RichardRichter" rel="nofollow"></a></body></html>
